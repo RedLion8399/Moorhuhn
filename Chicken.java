@@ -17,6 +17,9 @@ public class Chicken extends Actor {
      */
     public Chicken() {
         world = (GameWorld) getWorld();
+        size = Greenfoot.getRandomNumber(4) + 2;
+        getImage().scale(size * 15, size * 15);
+        world.increaseChickenAmount();
     }
 
     /**

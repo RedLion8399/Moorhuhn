@@ -39,4 +39,13 @@ public class GameWorld extends World {
      */
     public void spawnHuhn() {
     }
+
+    /**
+     * The increaseChickenAmount method increases the chicken counter by one. It
+     * is called in the constructor of the Chicken class when a new chicken is
+     * spawned.
+     */
+    public void increaseChickenAmount() {
+        chickenAmount++;
+    }
 }
