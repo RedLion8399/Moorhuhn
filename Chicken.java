@@ -14,9 +14,23 @@ public class Chicken extends Actor {
     /**
      * The constructor initializes the size of the target, sets the image of the
      * target and stores a reference to the world.
+     * 
+     * @param world       the world in which the target is located
+     * @param facingRight a boolean value that determines the direction the
+     *                    target is facing. If it is true the target is facing
+     *                    right, if it is false the target is facing left.
      */
-    public Chicken() {
-        world = (GameWorld) getWorld();
+    public Chicken(GameWorld world, boolean facingRight) {
+        this.world = world;
+        size = Greenfoot.getRandomNumber(4) + 2;
+        getImage().scale(size * 15, size * 15);
+
+        if (facingRight) {
+            setRotation(0);
+        } else {
+            setRotation(180);
+            getImage().mirrorVertically();
+        }
     }
 
     /**
