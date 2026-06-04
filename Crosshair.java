@@ -31,6 +31,18 @@ public class Crosshair extends Actor {
      * frame. It controls the player input and processes them.
      */
     public void act() {
+        move();
+    }
+
+    /**
+     * The move method controls the movement of the crosshair parallel to the
+     * mouse cursor.
+     */
+    public void move() {
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo != null) {
+            setLocation(mouseInfo.getX(), mouseInfo.getY());
+        }
     }
 
     /**
