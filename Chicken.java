@@ -24,7 +24,6 @@ public class Chicken extends Actor {
         this.world = world;
         size = Greenfoot.getRandomNumber(4) + 2;
         getImage().scale(size * 15, size * 15);
-        world.increaseChickenAmount();
 
         if (facingRight) {
             setRotation(0);

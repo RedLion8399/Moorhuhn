@@ -44,6 +44,7 @@ public class GameWorld extends World {
      */
     public void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
+            chickenAmount++;
             if (Greenfoot.getRandomNumber(2) == 1) {
                 addObject(new Chicken(this, true), 0,
                         Greenfoot.getRandomNumber(getHeight() - 60) + 30);
