@@ -15,10 +15,15 @@ public class Crosshair extends Actor {
 
     /**
      * The constructor initializes the crosshair.
-     * It sets the munition to a certain value.
+     * It sets the munition to 8 and scales the image of the crosshair to a
+     * certain size.
+     * 
+     * @param world the world in which the crosshair is located
      */
-    public Crosshair() {
-        world = (GameWorld) getWorld();
+    public Crosshair(GameWorld world) {
+        this.world = world;
+        munitionAmount = 8;
+        getImage().scale(30, 30);
     }
 
     /**

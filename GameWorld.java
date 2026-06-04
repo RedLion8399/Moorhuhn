@@ -21,6 +21,9 @@ public class GameWorld extends World {
         super(600, 400, 1, false);
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
+
+        crosshair = new Crosshair(this);
+        addObject(crosshair, getWidth() / 2, getHeight() / 2);
     }
 
     /**
