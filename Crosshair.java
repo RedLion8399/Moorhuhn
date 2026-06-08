@@ -32,6 +32,27 @@ public class Crosshair extends Actor {
      */
     public void act() {
         move();
+        processUserInput();
+    }
+
+    /**
+     * The processUserInput method processes the user input. It is called in the
+     * act method. It checks if the left or right mouse button is pressed and
+     * calls the shoot method if the left mouse button is pressed and the
+     * reloadMunition method if the right mouse button is pressed.
+     */
+    public void processUserInput() {
+        final int LEFT_MOUSE_BUTTON = 1;
+        final int RIGHT_MOUSE_BUTTON = 3;
+
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo != null) {
+            if (mouseInfo.getButton() == LEFT_MOUSE_BUTTON) {
+                shoot();
+            } else if (mouseInfo.getButton() == RIGHT_MOUSE_BUTTON) {
+                reloadMunition();
+            }
+        }
     }
 
     /**
