@@ -15,10 +15,15 @@ public class Crosshair extends Actor {
 
     /**
      * The constructor initializes the crosshair.
-     * It sets the munition to a certain value.
+     * It sets the munition to 8 and scales the image of the crosshair to a
+     * certain size.
+     * 
+     * @param world the world in which the crosshair is located
      */
-    public Crosshair() {
-        world = (GameWorld) getWorld();
+    public Crosshair(GameWorld world) {
+        this.world = world;
+        munitionAmount = 8;
+        getImage().scale(30, 30);
     }
 
     /**
@@ -26,6 +31,39 @@ public class Crosshair extends Actor {
      * frame. It controls the player input and processes them.
      */
     public void act() {
+        move();
+        processUserInput();
+    }
+
+    /**
+     * The processUserInput method processes the user input. It is called in the
+     * act method. It checks if the left or right mouse button is pressed and
+     * calls the shoot method if the left mouse button is pressed and the
+     * reloadMunition method if the right mouse button is pressed.
+     */
+    public void processUserInput() {
+        final int LEFT_MOUSE_BUTTON = 1;
+        final int RIGHT_MOUSE_BUTTON = 3;
+
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo != null) {
+            if (mouseInfo.getButton() == LEFT_MOUSE_BUTTON) {
+                shoot();
+            } else if (mouseInfo.getButton() == RIGHT_MOUSE_BUTTON) {
+                reloadMunition();
+            }
+        }
+    }
+
+    /**
+     * The move method controls the movement of the crosshair parallel to the
+     * mouse cursor.
+     */
+    public void move() {
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo != null) {
+            setLocation(mouseInfo.getX(), mouseInfo.getY());
+        }
     }
 
     /**
@@ -37,6 +75,16 @@ public class Crosshair extends Actor {
      * munition left nothing happens.
      */
     public void shoot() {
+        if (munitionAmount == 0) {
+            return;
+        }
+        munitionAmount--;
+
+        Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
+        if (chicken != null) {
+            world.removeObject(chicken);
+            world.decreaseChickenAmount();
+        }
     }
 
     /**
@@ -45,5 +93,8 @@ public class Crosshair extends Actor {
      * gun with a certain amount of munition if it was empty before.
      */
     public void reloadMunition() {
+        if (munitionAmount == 0) {
+            munitionAmount = 8;
+        }
     }
 }

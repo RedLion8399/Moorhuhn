@@ -21,6 +21,9 @@ public class GameWorld extends World {
         super(600, 400, 1, false);
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
+
+        crosshair = new Crosshair(this);
+        addObject(crosshair, getWidth() / 2, getHeight() / 2);
     }
 
     /**
@@ -56,11 +59,9 @@ public class GameWorld extends World {
     }
 
     /**
-     * The increaseChickenAmount method increases the chicken counter by one. It
-     * is called in the constructor of the Chicken class when a new chicken is
-     * spawned.
+     * The decreaseChickenAmount method decreases the chicken counter by one.
      */
-    public void increaseChickenAmount() {
-        chickenAmount++;
+    public void decreaseChickenAmount() {
+        chickenAmount--;
     }
 }
