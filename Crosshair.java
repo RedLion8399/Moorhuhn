@@ -93,5 +93,8 @@ public class Crosshair extends Actor {
      * gun with a certain amount of munition if it was empty before.
      */
     public void reloadMunition() {
+        if (munitionAmount == 0) {
+            munitionAmount = 8;
+        }
     }
 }
