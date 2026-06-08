@@ -66,4 +66,11 @@ public class GameWorld extends World {
     public void increaseChickenAmount() {
         chickenAmount++;
     }
+
+    /**
+     * The decreaseChickenAmount method decreases the chicken counter by one.
+     */
+    public void decreaseChickenAmount() {
+        chickenAmount--;
+    }
 }

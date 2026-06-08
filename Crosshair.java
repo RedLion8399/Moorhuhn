@@ -75,6 +75,16 @@ public class Crosshair extends Actor {
      * munition left nothing happens.
      */
     public void shoot() {
+        if (munitionAmount == 0) {
+            return;
+        }
+        munitionAmount--;
+
+        Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
+        if (chicken != null) {
+            world.removeObject(chicken);
+            world.decreaseChickenAmount();
+        }
     }
 
     /**
