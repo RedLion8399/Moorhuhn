@@ -10,27 +10,32 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Chicken extends Actor {
     private int size;
     private GameWorld world;
+    private int x_0;
+    private int y_0;
 
     /**
-     * The constructor initializes the size of the target, sets the image of the
-     * target and stores a reference to the world.
-     * 
-     * @param world       the world in which the target is located
-     * @param facingRight a boolean value that determines the direction the
-     *                    target is facing. If it is true the target is facing
-     *                    right, if it is false the target is facing left.
+     * Initializes a Chicken with a random size and position, sets its
+     * orientation (left or right), and adds it to the world.
+     *
+     * @param world the world to which the Chicken is added
      */
-    public Chicken(GameWorld world, boolean facingRight) {
+    public Chicken(GameWorld world) {
         this.world = world;
         size = Greenfoot.getRandomNumber(4) + 2;
         getImage().scale(size * 15, size * 15);
 
-        if (facingRight) {
+        y_0 = Greenfoot.getRandomNumber(world.getHeight() - 60) + 30;
+
+        if (Greenfoot.getRandomNumber(2) == 1) {
             setRotation(0);
+            x_0 = 0;
         } else {
             setRotation(180);
             getImage().mirrorVertically();
+            x_0 = world.getWidth();
         }
+
+        world.addObject(this, x_0, y_0);
     }
 
     /**
