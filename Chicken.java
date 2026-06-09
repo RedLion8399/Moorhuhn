@@ -8,8 +8,8 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 0.1.0
  */
 public class Chicken extends Actor {
-    private int size;
-    private GameWorld world;
+    private final int SIZE;
+    private final GameWorld WORLD;
 
     private final int x_0;
     private final int y_0;
@@ -24,11 +24,11 @@ public class Chicken extends Actor {
      * @param world the world to which the Chicken is added
      */
     public Chicken(GameWorld world) {
-        this.world = world;
-        size = Greenfoot.getRandomNumber(4) + 2;
-        getImage().scale(size * 15, size * 15);
+        this.WORLD = world;
+        SIZE = Greenfoot.getRandomNumber(4) + 2;
+        getImage().scale(SIZE * 15, SIZE * 15);
 
-        y_0 = Greenfoot.getRandomNumber(world.getHeight() - 60) + 30;
+        y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
         FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
 
@@ -71,9 +71,9 @@ public class Chicken extends Actor {
                 + y_0);
         setLocation(x, y);
 
-        if (getX() < 0 || getX() > world.getWidth()) {
-            world.decreaseChickenAmount();
-            world.removeObject(this);
+        if (getX() < 0 || getX() > WORLD.getWidth()) {
+            WORLD.decreaseChickenAmount();
+            WORLD.removeObject(this);
         }
     }
 }
