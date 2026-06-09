@@ -72,29 +72,36 @@ public class Crosshair extends Actor {
      * direction the crosshair is currently facing. If the shot hits a target
      * the target is deleted and the chicken counter is decreased by one. The
      * method also decreases the munition by one when shooting. If there is no
-     * munition left nothing happens.
+     * munition left nothing happens. On these different events different sounds
+     * are played.
      */
     public void shoot() {
         if (munitionAmount == 0) {
+            Greenfoot.playSound("sounds/no-munition.mp3");
             return;
         }
         munitionAmount--;
+        Greenfoot.playSound("sounds/peng-1.mp3");
 
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
+            Greenfoot.playSound("sounds/hit-target.mp3");
             world.removeObject(chicken);
             world.decreaseChickenAmount();
+        } else {
+            Greenfoot.playSound("sounds/miss-shot.mp3");
         }
     }
 
     /**
      * The reloadMunition method controls the reloading of the gun. It is called
      * in the act method if the right mouse button is pressed. It reloads the
-     * gun with a certain amount of munition if it was empty before.
+     * gun with 8 bullets if there is no munition left and plays a sound.
      */
     public void reloadMunition() {
         if (munitionAmount == 0) {
             munitionAmount = 8;
+            Greenfoot.playSound("sounds/reload.mp3");
         }
     }
 }
