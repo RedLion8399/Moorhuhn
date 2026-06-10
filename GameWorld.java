@@ -10,6 +10,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class GameWorld extends World {
     private int chickenAmount;
     private Crosshair crosshair;
+    private final Scoreboard SCOREBOARD;
 
     /**
      * Constructor for objects of class GameWorld.
@@ -24,6 +25,8 @@ public class GameWorld extends World {
 
         crosshair = new Crosshair(this);
         addObject(crosshair, getWidth() / 2, getHeight() / 2);
+
+        SCOREBOARD = new Scoreboard(this);
     }
 
     /**
