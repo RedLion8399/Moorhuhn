@@ -8,29 +8,42 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 0.1.0
  */
 public class Chicken extends Actor {
-    private int size;
-    private GameWorld world;
+    private final int SIZE;
+    private final GameWorld WORLD;
+
+    private final int x_0;
+    private final int y_0;
+    private final int SPEED;
+    private final int FLIGHT_HEIGHT;
+    private final int FLIGHT_FREQUENCY;
 
     /**
-     * The constructor initializes the size of the target, sets the image of the
-     * target and stores a reference to the world.
-     * 
-     * @param world       the world in which the target is located
-     * @param facingRight a boolean value that determines the direction the
-     *                    target is facing. If it is true the target is facing
-     *                    right, if it is false the target is facing left.
+     * Initializes a Chicken with a random size and position, sets its
+     * orientation (left or right), and adds it to the world.
+     *
+     * @param world the world to which the Chicken is added
      */
-    public Chicken(GameWorld world, boolean facingRight) {
-        this.world = world;
-        size = Greenfoot.getRandomNumber(4) + 2;
-        getImage().scale(size * 15, size * 15);
+    public Chicken(GameWorld world) {
+        this.WORLD = world;
+        SIZE = Greenfoot.getRandomNumber(4) + 2;
+        getImage().scale(SIZE * 15, SIZE * 15);
 
-        if (facingRight) {
+        y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
+        FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
+        FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
+
+        if (Greenfoot.getRandomNumber(2) == 1) {
             setRotation(0);
+            x_0 = 0;
+            SPEED = Greenfoot.getRandomNumber(4) + 1;
         } else {
             setRotation(180);
             getImage().mirrorVertically();
+            x_0 = world.getWidth();
+            SPEED = -Greenfoot.getRandomNumber(4) - 1;
         }
+
+        world.addObject(this, x_0, y_0);
     }
 
     /**
@@ -39,6 +52,7 @@ public class Chicken extends Actor {
      * method.
      */
     public void act() {
+        move();
     }
 
     /**
@@ -48,6 +62,18 @@ public class Chicken extends Actor {
      * deleted and the chicken counter is decreased by one.
      */
     public void move() {
-    }
+        int x = getX();
+        int y = getY();
 
+        x += SPEED;
+        y = (int) (FLIGHT_HEIGHT
+                * Math.sin(x * (Math.PI / FLIGHT_FREQUENCY))
+                + y_0);
+        setLocation(x, y);
+
+        if (getX() < 0 || getX() > WORLD.getWidth()) {
+            WORLD.decreaseChickenAmount();
+            WORLD.removeObject(this);
+        }
+    }
 }
