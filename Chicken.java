@@ -9,6 +9,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Chicken extends Actor {
     private final int SIZE;
+    private final int POINTS;
     private final GameWorld WORLD;
 
     private final int x_0;
@@ -19,14 +20,15 @@ public class Chicken extends Actor {
 
     /**
      * Initializes a Chicken with a random size and position, sets its
-     * orientation (left or right), and adds it to the world.
+     * orientation (left or right), sets its speed, parameters for its movement
+     * curve and points and adds it to the world.
      *
      * @param world the world to which the Chicken is added
      */
     public Chicken(GameWorld world) {
         this.WORLD = world;
-        SIZE = Greenfoot.getRandomNumber(4) + 2;
-        getImage().scale(SIZE * 15, SIZE * 15);
+        SIZE = Greenfoot.getRandomNumber(3) + 1;
+        getImage().scale(SIZE * 25, SIZE * 25);
 
         y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
         FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
@@ -44,6 +46,15 @@ public class Chicken extends Actor {
         }
 
         world.addObject(this, x_0, y_0);
+
+        switch (SIZE) {
+            case 1 -> POINTS = 25;
+            case 2 -> POINTS = 10;
+            case 3 -> POINTS = 5;
+
+            default -> throw new IllegalStateException(
+                    "Unexpected value SIZE: " + SIZE);
+        }
     }
 
     /**

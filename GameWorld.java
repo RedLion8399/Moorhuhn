@@ -9,6 +9,8 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameWorld extends World {
     private int chickenAmount;
+    private int points;
+
     private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
 
