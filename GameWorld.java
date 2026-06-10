@@ -9,7 +9,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameWorld extends World {
     private int chickenAmount;
-    private Crosshair crosshair;
+    private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
 
     /**
@@ -23,8 +23,8 @@ public class GameWorld extends World {
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
-        crosshair = new Crosshair(this);
-        addObject(crosshair, getWidth() / 2, getHeight() / 2);
+        CROSSHAIR = new Crosshair(this);
+        addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
 
         SCOREBOARD = new Scoreboard(this);
     }
