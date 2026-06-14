@@ -41,10 +41,14 @@ public class Scoreboard extends Actor {
      * The update method updates the scoreboard and displays
      * the points and munition.
      */
-    public void update() {
+    private void update() {
+        String message = String.format("Punte: %d    Munition: %d",
+                WORLD.getPoints(), CROSSHAIR.getMunitionAmount());
         getImage().clear();
         setImage("images/display.png");
-        getImage().drawString("Punte: " + WORLD.getPoints(), 10, 30);
+        getImage().drawString(message, 10,
+                (getImage().getHeight() + getImage().getFont().getSize()) / 2);
         setLocation(WORLD.getWidth() - getImage().getWidth() / 2 - 8, getY());
+
     }
 }
