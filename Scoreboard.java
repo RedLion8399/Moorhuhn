@@ -29,5 +29,17 @@ public class Scoreboard extends Actor {
      * including the update methode.
      */
     public void act() {
+        update();
+    }
+
+    /**
+     * The update method updates the scoreboard and displays
+     * the points and munition.
+     */
+    public void update() {
+        getImage().clear();
+        setImage("images/display.png");
+        getImage().drawString("Punte: " + WORLD.getPoints(), 10, 30);
+        setLocation(WORLD.getWidth() - getImage().getWidth() / 2 - 8, getY());
     }
 }

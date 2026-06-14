@@ -66,4 +66,13 @@ public class GameWorld extends World {
     public void addPoints(int points) {
         this.points += points;
     }
+
+    /**
+     * The getPoints method returns the current score.
+     * 
+     * @return the current score
+     */
+    public int getPoints() {
+        return points;
+    }
 }
