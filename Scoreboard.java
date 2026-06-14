@@ -9,13 +9,18 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Scoreboard extends Actor {
     private final GameWorld WORLD;
+    private final Crosshair CROSSHAIR;
 
     /**
      * The constructor initializes the scoreboard. It scales the image of the
      * scoreboard to a certain size and adds it to the world.
+     * 
+     * @param world     the world in which the scoreboard is displayed
+     * @param crosshair the crosshair of the player
      */
-    public Scoreboard(GameWorld world) {
+    public Scoreboard(GameWorld world, Crosshair crosshair) {
         WORLD = world;
+        CROSSHAIR = crosshair;
         getImage().scale(150, 50);
 
         WORLD.addObject(this, WORLD.getWidth() -

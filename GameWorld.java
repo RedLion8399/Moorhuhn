@@ -28,7 +28,7 @@ public class GameWorld extends World {
         CROSSHAIR = new Crosshair(this);
         addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
 
-        SCOREBOARD = new Scoreboard(this);
+        SCOREBOARD = new Scoreboard(this, CROSSHAIR);
     }
 
     /**

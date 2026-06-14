@@ -114,4 +114,13 @@ public class Crosshair extends Actor {
             Greenfoot.playSound("sounds/reload.mp3");
         }
     }
+
+    /**
+     * The getMunitionAmount method returns the current munition amount.
+     * 
+     * @return the current munition amount
+     */
+    public int getMunitionAmount() {
+        return munitionAmount;
+    }
 }
