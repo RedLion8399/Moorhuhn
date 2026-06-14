@@ -57,4 +57,13 @@ public class GameWorld extends World {
     public void decreaseChickenAmount() {
         chickenAmount--;
     }
+
+    /**
+     * The addPoints method adds a certain amount of points to the score.
+     * 
+     * @param points the amount of points to add
+     */
+    public void addPoints(int points) {
+        this.points += points;
+    }
 }

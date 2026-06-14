@@ -87,4 +87,14 @@ public class Chicken extends Actor {
             WORLD.removeObject(this);
         }
     }
+
+    /**
+     * The hit method is called if a shot hits a target.
+     * It deletes the target, decreases the chicken counter and adds points.
+     */
+    public void hit() {
+        WORLD.decreaseChickenAmount();
+        WORLD.addPoints(POINTS);
+        WORLD.removeObject(this);
+    }
 }

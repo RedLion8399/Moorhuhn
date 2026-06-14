@@ -97,8 +97,7 @@ public class Crosshair extends Actor {
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
             Greenfoot.playSound("sounds/hit-target.mp3");
-            WORLD.removeObject(chicken);
-            WORLD.decreaseChickenAmount();
+            chicken.hit();
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }
