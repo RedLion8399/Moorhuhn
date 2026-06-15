@@ -6,6 +6,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
+ * 
+ * @see Crosshair
+ * @see Chicken
  */
 public class GameWorld extends World {
     private int chickenAmount;
@@ -19,6 +22,8 @@ public class GameWorld extends World {
      * It creates a GameWorld object with certain dimensions and a certain cell
      * size. It creates references to other objects that are needed in the
      * world.
+     * 
+     * @see Crosshair
      */
     public GameWorld() {
         super(600, 400, 1, false);
@@ -35,8 +40,11 @@ public class GameWorld extends World {
 
     /**
      * The act method is the anchor for the game loop which calls it on every
-     * frame. It controls the spawning of the targets and the crosshair.
+     * frame. It controls the spawning of the targets.
+     * 
+     * @see #spawnChicken()
      */
+    @Override
     public void act() {
         spawnChicken();
     }
@@ -46,7 +54,7 @@ public class GameWorld extends World {
      * current number of chickens. The maximum number of chickens is limited to
      * 5.
      */
-    public void spawnChicken() {
+    private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
             new Chicken(this);
@@ -55,6 +63,8 @@ public class GameWorld extends World {
 
     /**
      * The decreaseChickenAmount method decreases the chicken counter by one.
+     * 
+     * @see Chicken
      */
     public void decreaseChickenAmount() {
         chickenAmount--;

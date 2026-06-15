@@ -6,6 +6,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
+ * 
+ * @see GameWorld
+ * @see Crosshair
  */
 public class Chicken extends Actor {
     private final int SIZE;
@@ -19,11 +22,13 @@ public class Chicken extends Actor {
     private final int FLIGHT_FREQUENCY;
 
     /**
-     * Initializes a Chicken with a random size and position, sets its
+     * Initializes a Chicken with a random size and position, sets its     
      * orientation (left or right), sets its speed, parameters for its movement
-     * curve and points and adds it to the world.
+     * curve and points and adds it to the {@link GameWorld}.
      *
      * @param world the world to which the Chicken is added
+     * 
+     * @see GameWorld#addObject(Actor, int, int)
      */
     public Chicken(GameWorld world) {
         this.WORLD = world;
@@ -61,18 +66,21 @@ public class Chicken extends Actor {
      * The act method is the anchor for the game loop which calls it on every
      * frame. Especially the movement of the targets is controlled in this
      * method.
+     * 
+     * @see #move()
      */
+    @Override
     public void act() {
         move();
     }
 
     /**
      * The move method controls the movement of the targets. It is called in the
-     * act method. It moves the chicken with constant speed in the direction it
-     * is currently facing. If the chicken reaches the edge of the world it is
-     * deleted and the chicken counter is decreased by one.
+     * {@link #act()} method. It moves the chicken with constant speed in the
+     * direction it is currently facing. If the chicken reaches the edge of
+     * the world it is deleted and the chicken counter is decreased by one.
      */
-    public void move() {
+    private void move() {
         int x = getX();
         int y = getY();
 
