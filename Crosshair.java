@@ -44,7 +44,7 @@ public class Crosshair extends Actor {
      * reloadMunition method if the right mouse button is pressed. It also
      * controls the shooting delay.
      */
-    public void processUserInput() {
+    private void processUserInput() {
         final int LEFT_MOUSE_BUTTON = 1;
         final int RIGHT_MOUSE_BUTTON = 3;
 
@@ -64,7 +64,7 @@ public class Crosshair extends Actor {
      * The move method controls the movement of the crosshair parallel to the
      * mouse cursor.
      */
-    public void move() {
+    private void move() {
         MouseInfo mouseInfo = Greenfoot.getMouseInfo();
         if (mouseInfo != null) {
             setLocation(mouseInfo.getX(), mouseInfo.getY());
@@ -81,7 +81,7 @@ public class Crosshair extends Actor {
      * are played. After shooting there is a short delay until the next shot can
      * be fired which is reset after shooting.
      */
-    public void shoot() {
+    private void shoot() {
         if (shootingDelay < 10) {
             return;
         }
@@ -109,7 +109,7 @@ public class Crosshair extends Actor {
      * in the act method if the right mouse button is pressed. It reloads the
      * gun with 8 bullets if there is no munition left and plays a sound.
      */
-    public void reloadMunition() {
+    private void reloadMunition() {
         if (munitionAmount == 0) {
             munitionAmount = 8;
             Greenfoot.playSound("sounds/reload.mp3");

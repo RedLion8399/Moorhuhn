@@ -61,7 +61,7 @@ public class Chicken extends Actor {
      * is currently facing. If the chicken reaches the edge of the world it is
      * deleted and the chicken counter is decreased by one.
      */
-    public void move() {
+    private void move() {
         int x = getX();
         int y = getY();
 

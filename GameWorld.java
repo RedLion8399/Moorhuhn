@@ -39,7 +39,7 @@ public class GameWorld extends World {
      * current number of chickens. The maximum number of chickens is limited to
      * 5.
      */
-    public void spawnChicken() {
+    private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
             new Chicken(this);
