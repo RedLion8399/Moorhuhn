@@ -1,5 +1,7 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+@SuppressWarnings("unused")
+
 /**
  * The Crosshair class represents the crosshair in the game and is the equal to
  * a player. It controlls the player input and processes them by moving the
@@ -13,8 +15,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  */
 public class Crosshair extends Actor {
-    private int munitionAmount;
     private final GameWorld WORLD;
+
+    private int munitionAmount;
     private int shootingDelay;
 
     /**
@@ -124,6 +127,8 @@ public class Crosshair extends Actor {
      * in the {@link #act()} method if the right mouse button is pressed. It
      * reloads the gun with 8 bullets if there is no munition left and plays a
      * sound.
+     * 
+     * @see #shoot()
      */
     private void reloadMunition() {
         if (munitionAmount == 0) {

@@ -11,10 +11,10 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Crosshair
  */
 public class Chicken extends Actor {
-    private final int SIZE;
     private final int POINTS;
     private final GameWorld WORLD;
 
+    private final int SIZE;
     private final int x_0;
     private final int y_0;
     private final int SPEED;
@@ -22,13 +22,15 @@ public class Chicken extends Actor {
     private final int FLIGHT_FREQUENCY;
 
     /**
-     * Initializes a Chicken with a random size and position, sets its     
+     * Initializes a Chicken with a random size and position, sets its
      * orientation (left or right), sets its speed, parameters for its movement
      * curve and points and adds it to the {@link GameWorld}.
      *
      * @param world the world to which the Chicken is added
      * 
      * @see GameWorld#addObject(Actor, int, int)
+     * 
+     * @throws IllegalStateException if te size is out of bounds
      */
     public Chicken(GameWorld world) {
         this.WORLD = world;
@@ -46,11 +48,11 @@ public class Chicken extends Actor {
         } else {
             setRotation(180);
             getImage().mirrorVertically();
-            x_0 = world.getWidth();
+            x_0 = WORLD.getWidth();
             SPEED = -Greenfoot.getRandomNumber(4) - 1;
         }
 
-        world.addObject(this, x_0, y_0);
+        WORLD.addObject(this, x_0, y_0);
 
         switch (SIZE) {
             case 1 -> POINTS = 25;
@@ -99,6 +101,9 @@ public class Chicken extends Actor {
     /**
      * The hit method is called if a shot hits a target.
      * It deletes the target, decreases the chicken counter and adds points.
+     * 
+     * @see Crosshair#shoot()
+     * @see GameWorld#addPoints(int)
      */
     public void hit() {
         WORLD.decreaseChickenAmount();

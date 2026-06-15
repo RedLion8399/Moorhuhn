@@ -6,6 +6,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
+ * 
+ * @see GameWorld
+ * @see Crosshair
  */
 public class Scoreboard extends Actor {
     private final GameWorld WORLD;
@@ -17,6 +20,8 @@ public class Scoreboard extends Actor {
      * 
      * @param world     the world in which the scoreboard is displayed
      * @param crosshair the crosshair of the player
+     * 
+     * @see GameWorld#addObject(Actor, int, int)
      */
     public Scoreboard(GameWorld world, Crosshair crosshair) {
         WORLD = world;
@@ -31,7 +36,7 @@ public class Scoreboard extends Actor {
     /**
      * The act method is the acces point for the game loop
      * and is called regularly. It calls other methods regularly
-     * including the update methode.
+     * including the {@link #update()} methode.
      */
     public void act() {
         update();
@@ -40,6 +45,9 @@ public class Scoreboard extends Actor {
     /**
      * The update method updates the scoreboard and displays
      * the points and munition.
+     * 
+     * @see GameWorld#getPoints()
+     * @see Crosshair#getMunitionAmount()
      */
     private void update() {
         String message = String.format("Punte: %d    Munition: %d",

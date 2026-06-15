@@ -1,5 +1,7 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+@SuppressWarnings("unused")
+
 /**
  * The GameWorld class is the world in which the game takes place.
  * It innitializes all objects needed in the world and controls them.
@@ -9,13 +11,14 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @see Crosshair
  * @see Chicken
+ * @see Scoreboard
  */
 public class GameWorld extends World {
-    private int chickenAmount;
-    private int points;
-
     private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
+
+    private int chickenAmount;
+    private int points;
 
     /**
      * Constructor for objects of class GameWorld.
@@ -24,6 +27,7 @@ public class GameWorld extends World {
      * world.
      * 
      * @see Crosshair
+     * @see Scoreboard
      */
     public GameWorld() {
         super(600, 400, 1, false);
@@ -50,9 +54,9 @@ public class GameWorld extends World {
     }
 
     /**
-     * Spawns a Chicken in the world based on a probability that depends on the
-     * current number of chickens. The maximum number of chickens is limited to
-     * 5.
+     * Spawns a {@link Chicken} in the world based on a probability that depends
+     * on the current number of chickens. The maximum number of chickens is
+     * limited to 5.
      */
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
@@ -74,6 +78,8 @@ public class GameWorld extends World {
      * The addPoints method adds a certain amount of points to the score.
      * 
      * @param points the amount of points to add
+     * 
+     * @see #getPoints()
      */
     public void addPoints(int points) {
         this.points += points;
@@ -83,6 +89,8 @@ public class GameWorld extends World {
      * The getPoints method returns the current score.
      * 
      * @return the current score
+     * 
+     * @see #addPoints(int)
      */
     public int getPoints() {
         return points;
