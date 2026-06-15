@@ -22,6 +22,8 @@ public class GameWorld extends World {
      */
     public GameWorld() {
         super(600, 400, 1, false);
+        setPaintOrder(Crosshair.class, Chicken.class, Scoreboard.class,
+                GameWorld.class);
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
