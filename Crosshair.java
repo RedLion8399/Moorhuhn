@@ -14,7 +14,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Crosshair extends Actor {
     private int munitionAmount;
-    private GameWorld world;
+    private final GameWorld WORLD;
     private int shootingDelay;
 
     /**
@@ -27,7 +27,7 @@ public class Crosshair extends Actor {
      * @see GameWorld
      */
     public Crosshair(GameWorld world) {
-        this.world = world;
+        this.WORLD = world;
         munitionAmount = 8;
         shootingDelay = 0;
         getImage().scale(30, 30);
@@ -113,8 +113,7 @@ public class Crosshair extends Actor {
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
             Greenfoot.playSound("sounds/hit-target.mp3");
-            world.removeObject(chicken);
-            world.decreaseChickenAmount();
+            chicken.hit();
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }
@@ -131,5 +130,14 @@ public class Crosshair extends Actor {
             munitionAmount = 8;
             Greenfoot.playSound("sounds/reload.mp3");
         }
+    }
+
+    /**
+     * The getMunitionAmount method returns the current munition amount.
+     * 
+     * @return the current munition amount
+     */
+    public int getMunitionAmount() {
+        return munitionAmount;
     }
 }

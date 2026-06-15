@@ -12,7 +12,10 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameWorld extends World {
     private int chickenAmount;
-    private Crosshair crosshair;
+    private int points;
+
+    private final Crosshair CROSSHAIR;
+    private final Scoreboard SCOREBOARD;
 
     /**
      * Constructor for objects of class GameWorld.
@@ -24,11 +27,15 @@ public class GameWorld extends World {
      */
     public GameWorld() {
         super(600, 400, 1, false);
+        setPaintOrder(Crosshair.class, Chicken.class, Scoreboard.class,
+                GameWorld.class);
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
-        crosshair = new Crosshair(this);
-        addObject(crosshair, getWidth() / 2, getHeight() / 2);
+        CROSSHAIR = new Crosshair(this);
+        addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
+
+        SCOREBOARD = new Scoreboard(this, CROSSHAIR);
     }
 
     /**
@@ -61,5 +68,23 @@ public class GameWorld extends World {
      */
     public void decreaseChickenAmount() {
         chickenAmount--;
+    }
+
+    /**
+     * The addPoints method adds a certain amount of points to the score.
+     * 
+     * @param points the amount of points to add
+     */
+    public void addPoints(int points) {
+        this.points += points;
+    }
+
+    /**
+     * The getPoints method returns the current score.
+     * 
+     * @return the current score
+     */
+    public int getPoints() {
+        return points;
     }
 }
