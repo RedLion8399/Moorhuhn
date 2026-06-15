@@ -124,6 +124,8 @@ public class Crosshair extends Actor {
      * in the {@link #act()} method if the right mouse button is pressed. It
      * reloads the gun with 8 bullets if there is no munition left and plays a
      * sound.
+     * 
+     * @see #shoot()
      */
     private void reloadMunition() {
         if (munitionAmount == 0) {
