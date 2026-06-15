@@ -1,5 +1,7 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+@SuppressWarnings("unused")
+
 /**
  * The GameWorld class is the world in which the game takes place.
  * It innitializes all objects needed in the world and controls them.
@@ -12,11 +14,11 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Scoreboard
  */
 public class GameWorld extends World {
-    private int chickenAmount;
-    private int points;
-
     private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
+
+    private int chickenAmount;
+    private int points;
 
     /**
      * Constructor for objects of class GameWorld.
