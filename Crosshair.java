@@ -8,6 +8,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
+ * 
+ * @see Chicken
+ * @see GameWorld
  */
 public class Crosshair extends Actor {
     private int munitionAmount;
@@ -20,6 +23,8 @@ public class Crosshair extends Actor {
      * certain size.
      * 
      * @param world the world in which the crosshair is located
+     * 
+     * @see GameWorld
      */
     public Crosshair(GameWorld world) {
         this.world = world;
@@ -31,7 +36,11 @@ public class Crosshair extends Actor {
     /**
      * The act method is the anchor for the game loop which calls it on every
      * frame. It controls the player input and processes them.
+     * 
+     * @see #processUserInput()
+     * @see #move()
      */
+    @Override
     public void act() {
         move();
         processUserInput();
@@ -39,10 +48,12 @@ public class Crosshair extends Actor {
 
     /**
      * The processUserInput method processes the user input. It is called in the
-     * act method. It checks if the left or right mouse button is pressed and
-     * calls the shoot method if the left mouse button is pressed and the
-     * reloadMunition method if the right mouse button is pressed. It also
-     * controls the shooting delay.
+     * {@link #act()} method. It checks if the left or right mouse button is
+     * pressed and calls the {@link #shoot()} method if the left mouse button is
+     * pressed and the {@link #reloadMunition()} method if the right mouse
+     * button is pressed. It also controls the shooting delay.
+     * 
+     * @see greenfoot.MouseInfo
      */
     private void processUserInput() {
         final int LEFT_MOUSE_BUTTON = 1;
@@ -63,6 +74,8 @@ public class Crosshair extends Actor {
     /**
      * The move method controls the movement of the crosshair parallel to the
      * mouse cursor.
+     * 
+     * @see greenfoot.MouseInfo
      */
     private void move() {
         MouseInfo mouseInfo = Greenfoot.getMouseInfo();
@@ -73,13 +86,16 @@ public class Crosshair extends Actor {
 
     /**
      * The shoot method controls the shooting of the gun. It is called in
-     * the act method if the left mouse button is pressed. It shoots in the
-     * direction the crosshair is currently facing. If the shot hits a target
-     * the target is deleted and the chicken counter is decreased by one. The
-     * method also decreases the munition by one when shooting. If there is no
-     * munition left nothing happens. On these different events different sounds
-     * are played. After shooting there is a short delay until the next shot can
-     * be fired which is reset after shooting.
+     * the {@link #act()} method if the left mouse button is pressed. It shoots
+     * in the direction the crosshair is currently facing. If the shot hits a
+     * target the target is deleted and the chicken counter is decreased by
+     * one. The method also decreases the munition by one when shooting. If
+     * there is no munition left nothing happens. On these different events
+     * different sounds are played. After shooting there is a short delay
+     * until the next shot can be fired which is reset after shooting.
+     * 
+     * @see Chicken
+     * @see Greenfoot#playSound(String)
      */
     private void shoot() {
         if (shootingDelay < 10) {
@@ -106,8 +122,9 @@ public class Crosshair extends Actor {
 
     /**
      * The reloadMunition method controls the reloading of the gun. It is called
-     * in the act method if the right mouse button is pressed. It reloads the
-     * gun with 8 bullets if there is no munition left and plays a sound.
+     * in the {@link #act()} method if the right mouse button is pressed. It
+     * reloads the gun with 8 bullets if there is no munition left and plays a
+     * sound.
      */
     private void reloadMunition() {
         if (munitionAmount == 0) {
