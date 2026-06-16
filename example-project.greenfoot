@@ -3,6 +3,7 @@ class.Chicken.image=chicken-1.png
 class.Crosshair.image=crosshair-1.png
 class.GameWorld.image=field-4.png
 class.Scoreboard.image=display.png
+class.Tree.image=tree-1.png
 package.numDependencies=0
 package.numTargets=0
 project.charset=UTF-8
