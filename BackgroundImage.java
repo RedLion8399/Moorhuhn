@@ -23,4 +23,22 @@ public class BackgroundImage extends Actor {
 
         WORLD.addObject(this, WORLD.getWidth() / 2, WORLD.getHeight() / 2);
     }
+
+    /**
+     * Returns the start coordinate of the BackgroundImage
+     * 
+     * @return the start position
+     */
+    public int getImageStart() {
+        return getX() - getImage().getWidth() / 2;
+    }
+
+    /**
+     * Returns the end coordinate of the BackgroundImage
+     * 
+     * @return the end position
+     */
+    public int getImageEnd() {
+        return getX() + getImage().getWidth() / 2;
+    }
 }

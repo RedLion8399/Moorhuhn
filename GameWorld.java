@@ -65,7 +65,7 @@ public class GameWorld extends World {
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
-            new Chicken(this);
+            new Chicken(this, BACKGROUND_IMAGE);
         }
     }
 
