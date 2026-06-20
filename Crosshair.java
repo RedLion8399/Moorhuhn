@@ -72,6 +72,21 @@ public class Crosshair extends Actor {
                 reloadMunition();
             }
         }
+
+        checkScrolling();
+    }
+
+    /**
+     * The checkScrolling method is checks if the user gives a scolling input.
+     * If the Crosshair moves in a range of 50 pixels to the visable borders the
+     * displayed world is moved to that side.
+     */
+    private void checkScrolling() {
+        if (getX() < 50) {
+            WORLD.move(5);
+        } else if (getX() > WORLD.getWidth() - 50) {
+            WORLD.move(-5);
+        }
     }
 
     /**

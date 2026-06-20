@@ -70,6 +70,23 @@ public class GameWorld extends World {
     }
 
     /**
+     * The move method moves the displayed excerpt of the world.
+     * This includes the {@link Crosshair} and the {@link BackgroundImage}.
+     * It can only move if the new position is within the bounds of the visible
+     * world.
+     * 
+     * @param x the amount of pixels to move
+     */
+    public void move(int x) {
+        if (x > 0 && BACKGROUND_IMAGE.getImageStart() + x > 0) {
+            return;
+        } else if (x < 0 && BACKGROUND_IMAGE.getImageEnd() + x < getWidth()) {
+            return;
+        }
+        BACKGROUND_IMAGE.move(x);
+    }
+
+    /**
      * The decreaseChickenAmount method decreases the chicken counter by one.
      * 
      * @see Chicken
