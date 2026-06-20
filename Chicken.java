@@ -21,6 +21,7 @@ public class Chicken extends Actor {
     private final int SPEED;
     private final int FLIGHT_HEIGHT;
     private final int FLIGHT_FREQUENCY;
+    private final boolean FACING_RIGHT;
 
     /**
      * Initializes a Chicken with a random size and position, sets its
@@ -45,10 +46,12 @@ public class Chicken extends Actor {
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
 
         if (Greenfoot.getRandomNumber(2) == 1) {
+            FACING_RIGHT = true;
             setRotation(0);
             x_0 = BACKGROUND.getImageStart();
             SPEED = Greenfoot.getRandomNumber(4) + 1;
         } else {
+            FACING_RIGHT = false;
             setRotation(180);
             getImage().mirrorVertically();
             x_0 = BACKGROUND.getImageEnd();
@@ -112,5 +115,15 @@ public class Chicken extends Actor {
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);
+    }
+
+    /**
+     * The isFacingRight method returns whether the chicken is currently facing
+     * right or left.
+     * 
+     * @return whether the chicken is currently facing right or left
+     */
+    public boolean isFacingRight() {
+        return FACING_RIGHT;
     }
 }

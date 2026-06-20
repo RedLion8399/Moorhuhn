@@ -1,3 +1,4 @@
+import java.util.List;
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 @SuppressWarnings("unused")
@@ -71,19 +72,25 @@ public class GameWorld extends World {
 
     /**
      * The move method moves the displayed excerpt of the world.
-     * This includes the {@link Crosshair} and the {@link BackgroundImage}.
+     * This includes the {@link Chicken}s and the {@link BackgroundImage}.
      * It can only move if the new position is within the bounds of the visible
      * world.
      * 
-     * @param x the amount of pixels to move
+     * @param distance the amount of pixels to move
      */
-    public void move(int x) {
-        if (x > 0 && BACKGROUND_IMAGE.getImageStart() + x > 0) {
+    public void move(int distance) {
+        if (distance > 0 && BACKGROUND_IMAGE.getImageStart() + distance > 0) {
             return;
-        } else if (x < 0 && BACKGROUND_IMAGE.getImageEnd() + x < getWidth()) {
+        } else if (distance < 0
+                && BACKGROUND_IMAGE.getImageEnd() + distance < getWidth()) {
             return;
         }
-        BACKGROUND_IMAGE.move(x);
+        BACKGROUND_IMAGE.move(distance);
+
+        List<Chicken> chickens = getObjects(Chicken.class);
+        for (Chicken chicken : chickens) {
+            chicken.move(chicken.isFacingRight() ? distance : -distance);
+        }
     }
 
     /**
