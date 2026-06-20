@@ -12,10 +12,12 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Crosshair
  * @see Chicken
  * @see Scoreboard
+ * @see BackgroundImage
  */
 public class GameWorld extends World {
     private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
+    private final BackgroundImage BACKGROUND_IMAGE;
 
     private int chickenAmount;
     private int points;
@@ -28,18 +30,20 @@ public class GameWorld extends World {
      * 
      * @see Crosshair
      * @see Scoreboard
+     * @see BackgroundImage
      */
     public GameWorld() {
         super(600, 400, 1, false);
         setPaintOrder(Crosshair.class, Chicken.class, Scoreboard.class,
                 GameWorld.class);
-        getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
         CROSSHAIR = new Crosshair(this);
         addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
 
         SCOREBOARD = new Scoreboard(this, CROSSHAIR);
+
+        BACKGROUND_IMAGE = new BackgroundImage(this);
     }
 
     /**
