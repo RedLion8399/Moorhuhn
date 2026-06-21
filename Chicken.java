@@ -13,6 +13,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Chicken extends Actor {
     private final int POINTS;
     private final GameWorld WORLD;
+    private final BackgroundImage BACKGROUND;
 
     private final int SIZE;
     private final int x_0;
@@ -20,20 +21,23 @@ public class Chicken extends Actor {
     private final int SPEED;
     private final int FLIGHT_HEIGHT;
     private final int FLIGHT_FREQUENCY;
+    private final boolean FACING_RIGHT;
 
     /**
      * Initializes a Chicken with a random size and position, sets its
      * orientation (left or right), sets its speed, parameters for its movement
      * curve and points and adds it to the {@link GameWorld}.
      *
-     * @param world the world to which the Chicken is added
+     * @param world      the world to which the Chicken is added
+     * @param background the BackgroundImage of the world
      * 
      * @see GameWorld#addObject(Actor, int, int)
      * 
      * @throws IllegalStateException if te size is out of bounds
      */
-    public Chicken(GameWorld world) {
+    public Chicken(GameWorld world, BackgroundImage background) {
         this.WORLD = world;
+        this.BACKGROUND = background;
         SIZE = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(SIZE * 25, SIZE * 25);
 
@@ -42,13 +46,15 @@ public class Chicken extends Actor {
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
 
         if (Greenfoot.getRandomNumber(2) == 1) {
+            FACING_RIGHT = true;
             setRotation(0);
-            x_0 = 0;
+            x_0 = BACKGROUND.getImageStart();
             SPEED = Greenfoot.getRandomNumber(4) + 1;
         } else {
+            FACING_RIGHT = false;
             setRotation(180);
             getImage().mirrorVertically();
-            x_0 = WORLD.getWidth();
+            x_0 = BACKGROUND.getImageEnd();
             SPEED = -Greenfoot.getRandomNumber(4) - 1;
         }
 
@@ -80,7 +86,7 @@ public class Chicken extends Actor {
      * The move method controls the movement of the targets. It is called in the
      * {@link #act()} method. It moves the chicken with constant speed in the
      * direction it is currently facing. If the chicken reaches the edge of
-     * the world it is deleted and the chicken counter is decreased by one.
+     * the Background it is deleted and the chicken counter is decreased by one.
      */
     private void move() {
         int x = getX();
@@ -92,7 +98,7 @@ public class Chicken extends Actor {
                 + y_0);
         setLocation(x, y);
 
-        if (getX() < 0 || getX() > WORLD.getWidth()) {
+        if (!intersects(BACKGROUND)) {
             WORLD.decreaseChickenAmount();
             WORLD.removeObject(this);
         }
@@ -109,5 +115,15 @@ public class Chicken extends Actor {
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);
+    }
+
+    /**
+     * The isFacingRight method returns whether the chicken is currently facing
+     * right or left.
+     * 
+     * @return whether the chicken is currently facing right or left
+     */
+    public boolean isFacingRight() {
+        return FACING_RIGHT;
     }
 }
