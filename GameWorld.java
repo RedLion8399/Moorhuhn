@@ -40,6 +40,7 @@ public class GameWorld extends World {
         addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
 
         SCOREBOARD = new Scoreboard(this, CROSSHAIR);
+        new Tree(this);
     }
 
     /**
