@@ -7,8 +7,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Paul Jonas Dohle
  * @version 0.1.0
  */
-public class Tree extends Actor {
+public class Tree extends Actor implements ZIndexable {
     private final GameWorld WORLD;
+    private static final int Z_INDEX = 2;
 
     /**
      * Constructs objects of class tree
@@ -19,5 +20,15 @@ public class Tree extends Actor {
         WORLD.addObject(this,
                 Greenfoot.getRandomNumber(WORLD.getWidth() - 200) + 100,
                 WORLD.getHeight() - getImage().getHeight() / 2);
+    }
+
+    /**
+     * Returns the z-index of the tree.
+     * 
+     * @return the z-index of the tree
+     */
+    @Override
+    public int getZIndex() {
+        return Z_INDEX;
     }
 }

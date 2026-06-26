@@ -10,6 +10,6 @@
  */
 public class ChickenBack extends Chicken {
     public ChickenBack(GameWorld world) {
-        super(world);
+        super(world, 3);
     }
 }

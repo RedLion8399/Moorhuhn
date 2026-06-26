@@ -12,12 +12,11 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  * @see Crosshair
  */
-public class Chicken extends Actor {
-    protected static int zIndex;
-
+public abstract class Chicken extends Actor implements ZIndexable {
     private final int POINTS;
     private final GameWorld WORLD;
 
+    private final int zIndex;
     private final int SIZE;
     private final int x_0;
     private final int y_0;
@@ -51,11 +50,12 @@ public class Chicken extends Actor {
      * 
      * @throws IllegalStateException if te size is out of bounds
      */
-    public Chicken(GameWorld world) {
+    public Chicken(GameWorld world, int zIndex) {
         this.WORLD = world;
         SIZE = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(SIZE * 25, SIZE * 25);
 
+        this.zIndex = zIndex;
         y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
         FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
@@ -96,6 +96,16 @@ public class Chicken extends Actor {
     }
 
     /**
+     * Returns the z-index of the target.
+     * 
+     * @return the z-index of the target
+     */
+    @Override
+    public int getZIndex() {
+        return zIndex;
+    }
+
+    /**
      * The move method controls the movement of the targets. It is called in the
      * {@link #act()} method. It moves the chicken with constant speed in the
      * direction it is currently facing. If the chicken reaches the edge of
@@ -125,6 +135,10 @@ public class Chicken extends Actor {
      * @see GameWorld#addPoints(int)
      */
     public void hit() {
+        Tree tree = (Tree) getOneIntersectingObject(Tree.class);
+        if (tree != null && tree.getZIndex() < getZIndex()) {
+            return;
+        }
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);

@@ -10,6 +10,6 @@
  */
 public class ChickenFront extends Chicken {
     public ChickenFront(GameWorld world) {
-        super(world);
+        super(world, 1);
     }
 }
