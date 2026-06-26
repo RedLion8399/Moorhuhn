@@ -3,14 +3,18 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The Chicken class represents the targets in the game.
  * It controls the behaviour, properties and movement of the targets.
+ * The Chicken superclass provides the functionality which the subclasses
+ * specify by different z-coordinates.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 0.2.0
  * 
  * @see GameWorld
  * @see Crosshair
  */
 public class Chicken extends Actor {
+    protected static int zIndex;
+
     private final int POINTS;
     private final GameWorld WORLD;
 
@@ -20,6 +24,21 @@ public class Chicken extends Actor {
     private final int SPEED;
     private final int FLIGHT_HEIGHT;
     private final int FLIGHT_FREQUENCY;
+
+    /**
+     * Returns an object of a random subclass of the Chicken class.
+     * 
+     * @param world the world to which the Chicken is added
+     *
+     * @return an object of a random subclass of the Chicken class
+     */
+    public static Chicken getChicken(GameWorld world) {
+        if (Greenfoot.getRandomNumber(2) == 1) {
+            return new ChickenFront(world);
+        } else {
+            return new ChickenBack(world);
+        }
+    }
 
     /**
      * Initializes a Chicken with a random size and position, sets its

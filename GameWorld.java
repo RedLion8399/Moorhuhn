@@ -31,8 +31,8 @@ public class GameWorld extends World {
      */
     public GameWorld() {
         super(600, 400, 1, false);
-        setPaintOrder(Crosshair.class, Chicken.class, Scoreboard.class,
-                GameWorld.class);
+        setPaintOrder(Crosshair.class, Scoreboard.class, ChickenFront.class,
+                Tree.class, ChickenBack.class);
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
@@ -61,7 +61,7 @@ public class GameWorld extends World {
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
-            new Chicken(this);
+            Chicken.getChicken(this);
         }
     }
 
