@@ -142,5 +142,6 @@ public abstract class Chicken extends Actor implements ZIndexable {
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);
+        Greenfoot.playSound("sounds/hit-target.mp3");
     }
 }
