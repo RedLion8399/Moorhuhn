@@ -91,6 +91,11 @@ public class GameWorld extends World {
         for (Chicken chicken : chickens) {
             chicken.move(chicken.isFacingRight() ? distance : -distance);
         }
+
+        List<Obstacle> obstacles = getObjects(Obstacle.class);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.move(distance);
+        }
     }
 
     /**
