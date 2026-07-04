@@ -1,3 +1,4 @@
+import java.util.List;
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 @SuppressWarnings("unused")
@@ -12,10 +13,12 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Crosshair
  * @see Chicken
  * @see Scoreboard
+ * @see BackgroundImage
  */
 public class GameWorld extends World {
     private final Crosshair CROSSHAIR;
     private final Scoreboard SCOREBOARD;
+    private final BackgroundImage BACKGROUND_IMAGE;
 
     private int chickenAmount;
     private int points;
@@ -28,6 +31,7 @@ public class GameWorld extends World {
      * 
      * @see Crosshair
      * @see Scoreboard
+     * @see BackgroundImage
      */
     public GameWorld() {
         super(600, 400, 1, false);
@@ -38,8 +42,8 @@ public class GameWorld extends World {
 
         CROSSHAIR = new Crosshair(this);
         addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
-
         SCOREBOARD = new Scoreboard(this, CROSSHAIR);
+        BACKGROUND_IMAGE = new BackgroundImage(this);
         new Tree(this);
     }
 
@@ -62,7 +66,30 @@ public class GameWorld extends World {
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
-            Chicken.getChicken(this);
+            Chicken.getChicken(this, BACKGROUND_IMAGE);
+        }
+    }
+
+    /**
+     * The move method moves the displayed excerpt of the world.
+     * This includes the {@link Chicken}s and the {@link BackgroundImage}.
+     * It can only move if the new position is within the bounds of the visible
+     * world.
+     * 
+     * @param distance the amount of pixels to move
+     */
+    public void move(int distance) {
+        if (distance > 0 && BACKGROUND_IMAGE.getImageStart() + distance > 0) {
+            return;
+        } else if (distance < 0
+                && BACKGROUND_IMAGE.getImageEnd() + distance < getWidth()) {
+            return;
+        }
+        BACKGROUND_IMAGE.move(distance);
+
+        List<Chicken> chickens = getObjects(Chicken.class);
+        for (Chicken chicken : chickens) {
+            chicken.move(chicken.isFacingRight() ? distance : -distance);
         }
     }
 

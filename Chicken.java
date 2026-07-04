@@ -15,6 +15,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Chicken extends Actor implements ZIndexable {
     private final int POINTS;
     private final GameWorld WORLD;
+    private final BackgroundImage BACKGROUND;
 
     private final int zIndex;
     private final int SIZE;
@@ -23,6 +24,7 @@ public abstract class Chicken extends Actor implements ZIndexable {
     private final int SPEED;
     private final int FLIGHT_HEIGHT;
     private final int FLIGHT_FREQUENCY;
+    private final boolean FACING_RIGHT;
 
     /**
      * Returns an object of a random subclass of the Chicken class.
@@ -44,14 +46,16 @@ public abstract class Chicken extends Actor implements ZIndexable {
      * orientation (left or right), sets its speed, parameters for its movement
      * curve and points and adds it to the {@link GameWorld}.
      *
-     * @param world the world to which the Chicken is added
+     * @param world      the world to which the Chicken is added
+     * @param background the BackgroundImage of the world
      * 
      * @see GameWorld#addObject(Actor, int, int)
      * 
      * @throws IllegalStateException if te size is out of bounds
      */
-    public Chicken(GameWorld world, int zIndex) {
+    public Chicken(GameWorld world, BackgroundImage background, int zIndex) {
         this.WORLD = world;
+        this.BACKGROUND = background;
         SIZE = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(SIZE * 25, SIZE * 25);
 
@@ -61,13 +65,15 @@ public abstract class Chicken extends Actor implements ZIndexable {
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
 
         if (Greenfoot.getRandomNumber(2) == 1) {
+            FACING_RIGHT = true;
             setRotation(0);
-            x_0 = 0;
+            x_0 = BACKGROUND.getImageStart();
             SPEED = Greenfoot.getRandomNumber(4) + 1;
         } else {
+            FACING_RIGHT = false;
             setRotation(180);
             getImage().mirrorVertically();
-            x_0 = WORLD.getWidth();
+            x_0 = BACKGROUND.getImageEnd();
             SPEED = -Greenfoot.getRandomNumber(4) - 1;
         }
 
@@ -109,7 +115,7 @@ public abstract class Chicken extends Actor implements ZIndexable {
      * The move method controls the movement of the targets. It is called in the
      * {@link #act()} method. It moves the chicken with constant speed in the
      * direction it is currently facing. If the chicken reaches the edge of
-     * the world it is deleted and the chicken counter is decreased by one.
+     * the Background it is deleted and the chicken counter is decreased by one.
      */
     private void move() {
         int x = getX();
@@ -121,7 +127,7 @@ public abstract class Chicken extends Actor implements ZIndexable {
                 + y_0);
         setLocation(x, y);
 
-        if (getX() < 0 || getX() > WORLD.getWidth()) {
+        if (!intersects(BACKGROUND)) {
             WORLD.decreaseChickenAmount();
             WORLD.removeObject(this);
         }
@@ -144,5 +150,15 @@ public abstract class Chicken extends Actor implements ZIndexable {
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);
         Greenfoot.playSound("sounds/hit-target.mp3");
+    }
+
+    /**
+     * The isFacingRight method returns whether the chicken is currently facing
+     * right or left.
+     * 
+     * @return whether the chicken is currently facing right or left
+     */
+    public boolean isFacingRight() {
+        return FACING_RIGHT;
     }
 }
