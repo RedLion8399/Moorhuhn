@@ -9,7 +9,7 @@
  * @see Crosshair
  */
 public class ChickenBack extends Chicken {
-    public ChickenBack(GameWorld world) {
-        super(world, 3);
+    public ChickenBack(GameWorld world, BackgroundImage backgroundImage) {
+        super(world, backgroundImage, 3);
     }
 }

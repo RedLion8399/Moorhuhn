@@ -33,11 +33,12 @@ public abstract class Chicken extends Actor implements ZIndexable {
      *
      * @return an object of a random subclass of the Chicken class
      */
-    public static Chicken getChicken(GameWorld world) {
+    public static Chicken getChicken(GameWorld world,
+            BackgroundImage backgroundImage) {
         if (Greenfoot.getRandomNumber(2) == 1) {
-            return new ChickenFront(world);
+            return new ChickenFront(world, backgroundImage);
         } else {
-            return new ChickenBack(world);
+            return new ChickenBack(world, backgroundImage);
         }
     }
 
