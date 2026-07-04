@@ -3,18 +3,21 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The Chicken class represents the targets in the game.
  * It controls the behaviour, properties and movement of the targets.
+ * The Chicken superclass provides the functionality which the subclasses
+ * specify by different z-coordinates.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 0.2.0
  * 
  * @see GameWorld
  * @see Crosshair
  */
-public class Chicken extends Actor {
+public abstract class Chicken extends Actor implements ZIndexable {
     private final int POINTS;
     private final GameWorld WORLD;
     private final BackgroundImage BACKGROUND;
 
+    private final int zIndex;
     private final int SIZE;
     private final int x_0;
     private final int y_0;
@@ -22,6 +25,22 @@ public class Chicken extends Actor {
     private final int FLIGHT_HEIGHT;
     private final int FLIGHT_FREQUENCY;
     private final boolean FACING_RIGHT;
+
+    /**
+     * Returns an object of a random subclass of the Chicken class.
+     * 
+     * @param world the world to which the Chicken is added
+     *
+     * @return an object of a random subclass of the Chicken class
+     */
+    public static Chicken getChicken(GameWorld world,
+            BackgroundImage backgroundImage) {
+        if (Greenfoot.getRandomNumber(2) == 1) {
+            return new ChickenFront(world, backgroundImage);
+        } else {
+            return new ChickenBack(world, backgroundImage);
+        }
+    }
 
     /**
      * Initializes a Chicken with a random size and position, sets its
@@ -35,12 +54,13 @@ public class Chicken extends Actor {
      * 
      * @throws IllegalStateException if te size is out of bounds
      */
-    public Chicken(GameWorld world, BackgroundImage background) {
+    public Chicken(GameWorld world, BackgroundImage background, int zIndex) {
         this.WORLD = world;
         this.BACKGROUND = background;
         SIZE = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(SIZE * 25, SIZE * 25);
 
+        this.zIndex = zIndex;
         y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
         FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
         FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
@@ -83,6 +103,16 @@ public class Chicken extends Actor {
     }
 
     /**
+     * Returns the z-index of the target.
+     * 
+     * @return the z-index of the target
+     */
+    @Override
+    public int getZIndex() {
+        return zIndex;
+    }
+
+    /**
      * The move method controls the movement of the targets. It is called in the
      * {@link #act()} method. It moves the chicken with constant speed in the
      * direction it is currently facing. If the chicken reaches the edge of
@@ -112,9 +142,15 @@ public class Chicken extends Actor {
      * @see GameWorld#addPoints(int)
      */
     public void hit() {
+        Obstacle obstacle = (Obstacle) getOneIntersectingObject(Obstacle.class);
+        if (obstacle != null && obstacle.getZIndex() < getZIndex()) {
+            obstacle.hit();
+            return;
+        }
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
         WORLD.removeObject(this);
+        Greenfoot.playSound("sounds/hit-target.mp3");
     }
 
     /**

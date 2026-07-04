@@ -35,16 +35,16 @@ public class GameWorld extends World {
      */
     public GameWorld() {
         super(600, 400, 1, false);
-        setPaintOrder(Crosshair.class, Chicken.class, Scoreboard.class,
-                GameWorld.class);
+        setPaintOrder(Crosshair.class, Scoreboard.class, ChickenFront.class,
+                Tree.class, ChickenBack.class);
+        getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
         CROSSHAIR = new Crosshair(this);
         addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
-
         SCOREBOARD = new Scoreboard(this, CROSSHAIR);
-
         BACKGROUND_IMAGE = new BackgroundImage(this);
+        new Tree(this);
     }
 
     /**
@@ -66,7 +66,7 @@ public class GameWorld extends World {
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
-            new Chicken(this, BACKGROUND_IMAGE);
+            Chicken.getChicken(this, BACKGROUND_IMAGE);
         }
     }
 
@@ -90,6 +90,11 @@ public class GameWorld extends World {
         List<Chicken> chickens = getObjects(Chicken.class);
         for (Chicken chicken : chickens) {
             chicken.move(chicken.isFacingRight() ? distance : -distance);
+        }
+
+        List<Obstacle> obstacles = getObjects(Obstacle.class);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.move(distance);
         }
     }
 
