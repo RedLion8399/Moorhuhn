@@ -7,15 +7,13 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Paul Jonas Dohle
  * @version 0.1.0
  */
-public class Tree extends Actor implements ZIndexable {
-    private final GameWorld WORLD;
-    private static final int Z_INDEX = 2;
+public class Tree extends Obstacle {
 
     /**
      * Constructs objects of class tree
      */
     public Tree(GameWorld world) {
-        WORLD = world;
+        super(world, 2, 0);
         getImage().scale(300, 300);
         WORLD.addObject(this,
                 Greenfoot.getRandomNumber(WORLD.getWidth() - 200) + 100,
@@ -23,12 +21,11 @@ public class Tree extends Actor implements ZIndexable {
     }
 
     /**
-     * Returns the z-index of the tree.
+     * The hit method is called when the tree is hit by a projectile.
+     * It does nothing as trees are indestructible.
      * 
-     * @return the z-index of the tree
+     * @see Crosshair#shoot()
      */
-    @Override
-    public int getZIndex() {
-        return Z_INDEX;
+    public void hit() {
     }
 }
