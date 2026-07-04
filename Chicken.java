@@ -138,6 +138,7 @@ public abstract class Chicken extends Actor implements ZIndexable {
         Obstacle obstacle = (Obstacle) getOneIntersectingObject(Obstacle.class);
         if (obstacle != null && obstacle.getZIndex() < getZIndex()) {
             obstacle.hit();
+            return;
         }
         WORLD.decreaseChickenAmount();
         WORLD.addPoints(POINTS);
