@@ -1,21 +1,23 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The Crosshair class represents the crosshair in the game and is the equal to
- * a player. It controlls the player input and processes them by moving the
- * crosshair, checking for hits on the targets, controlling the munition and
- * reloading it.
+ * The Crosshair class represents the crosshair in the game and acts as the
+ * player's interface. It controlls the player input and processes them by
+ * moving the crosshair, checking for hits on the targets, controlling the
+ * munition and reloading it.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  * 
  * @see Chicken
  * @see GameWorld
  */
 public class Crosshair extends Actor {
+    private static final int MAX_MUNITION = 8;
+    private final GameWorld world;
+
     private int munitionAmount;
-    private GameWorld world;
-    private int shootingDelay;
+    private int shootingDelayCounter;
 
     /**
      * The constructor initializes the crosshair.
@@ -28,9 +30,13 @@ public class Crosshair extends Actor {
      */
     public Crosshair(GameWorld world) {
         this.world = world;
-        munitionAmount = 8;
-        shootingDelay = 0;
+        munitionAmount = MAX_MUNITION;
+        shootingDelayCounter = 0;
         getImage().scale(30, 30);
+
+        this.world.addObject(this,
+                this.world.getWidth() / 2,
+                this.world.getHeight() / 2);
     }
 
     /**
@@ -56,18 +62,36 @@ public class Crosshair extends Actor {
      * @see greenfoot.MouseInfo
      */
     private void processUserInput() {
-        final int LEFT_MOUSE_BUTTON = 1;
-        final int RIGHT_MOUSE_BUTTON = 3;
+        final int leftMouseButton = 1;
+        final int rightMouseButton = 3;
 
-        shootingDelay++;
+        shootingDelayCounter++;
 
         MouseInfo mouseInfo = Greenfoot.getMouseInfo();
         if (mouseInfo != null) {
-            if (mouseInfo.getButton() == LEFT_MOUSE_BUTTON) {
+            if (mouseInfo.getButton() == leftMouseButton) {
                 shoot();
-            } else if (mouseInfo.getButton() == RIGHT_MOUSE_BUTTON) {
+            } else if (mouseInfo.getButton() == rightMouseButton) {
                 reloadMunition();
             }
+        }
+
+        checkScrolling();
+    }
+
+    /**
+     * The checkScrolling method is checks if the user gives a scolling input.
+     * If the Crosshair moves in a range of 50 pixels to the visable borders the
+     * displayed world is moved to that side.
+     */
+    private void checkScrolling() {
+        final int scrollSpeed = 5;
+        final int scrollThreshold = 50;
+
+        if (getX() < scrollThreshold) {
+            world.move(scrollSpeed);
+        } else if (getX() > world.getWidth() - scrollThreshold) {
+            world.move(-scrollSpeed);
         }
     }
 
@@ -98,7 +122,9 @@ public class Crosshair extends Actor {
      * @see Greenfoot#playSound(String)
      */
     private void shoot() {
-        if (shootingDelay < 10) {
+        final int shootingDelay = 10;
+
+        if (shootingDelayCounter < shootingDelay) {
             return;
         }
 
@@ -107,14 +133,12 @@ public class Crosshair extends Actor {
             return;
         }
         munitionAmount--;
-        shootingDelay = 0;
+        shootingDelayCounter = 0;
         Greenfoot.playSound("sounds/peng-1.mp3");
 
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
-            Greenfoot.playSound("sounds/hit-target.mp3");
-            world.removeObject(chicken);
-            world.decreaseChickenAmount();
+            chicken.hit();
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }
@@ -125,11 +149,22 @@ public class Crosshair extends Actor {
      * in the {@link #act()} method if the right mouse button is pressed. It
      * reloads the gun with 8 bullets if there is no munition left and plays a
      * sound.
+     * 
+     * @see #shoot()
      */
     private void reloadMunition() {
         if (munitionAmount == 0) {
-            munitionAmount = 8;
+            munitionAmount = MAX_MUNITION;
             Greenfoot.playSound("sounds/reload.mp3");
         }
+    }
+
+    /**
+     * The getMunitionAmount method returns the current munition amount.
+     * 
+     * @return the current munition amount
+     */
+    public int getMunitionAmount() {
+        return munitionAmount;
     }
 }
