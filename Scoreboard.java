@@ -5,7 +5,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * the points and munition.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  * 
  * @see GameWorld
  * @see Crosshair
@@ -50,7 +50,7 @@ public class Scoreboard extends Actor {
      * @see Crosshair#getMunitionAmount()
      */
     private void update() {
-        String message = String.format("Punte: %d    Munition: %d",
+        String message = String.format("Punkte: %d    Munition: %d",
                 world.getPoints(), crosshair.getMunitionAmount());
         getImage().clear();
         setImage("images/display.png");

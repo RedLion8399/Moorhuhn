@@ -5,7 +5,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * As the Background has to move a seperate actor is needed to represent it.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  */
 public class BackgroundImage extends Actor {
     private static final int SCALE_FACTOR = 2;
@@ -26,7 +26,7 @@ public class BackgroundImage extends Actor {
     }
 
     /**
-     * Returns the start coordinate of the BackgroundImage
+     * Returns the leftmost coordinate of the BackgroundImage
      * 
      * @return the start position
      */
@@ -35,7 +35,7 @@ public class BackgroundImage extends Actor {
     }
 
     /**
-     * Returns the end coordinate of the BackgroundImage
+     * Returns the rightmost coordinate of the BackgroundImage
      * 
      * @return the end position
      */

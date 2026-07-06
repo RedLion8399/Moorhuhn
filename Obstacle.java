@@ -4,7 +4,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The Obstacle class represents obstacles in the game.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  * 
  * @see Tree
  */
@@ -33,6 +33,10 @@ public abstract class Obstacle extends Actor implements ZIndexable {
 
     /**
      * Returns the z-index of the obstacle.
+     * This determines the rendering order of obstacles in the game world.
+     * It also decides if chickens can hide behind the obstacle or not.
+     * Obstacles with a lower z-index are rendered in front of Objects with a
+     * higher z-index.
      * 
      * @return the z-index of the obstacle
      */

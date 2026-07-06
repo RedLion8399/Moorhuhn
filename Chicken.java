@@ -7,7 +7,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * specify by different z-coordinates.
  * 
  * @author Paul Jonas Dohle
- * @version 0.2.0
+ * @version 1.0.0
  * 
  * @see GameWorld
  * @see Crosshair
@@ -156,6 +156,10 @@ public abstract class Chicken extends Actor implements ZIndexable {
 
     /**
      * Returns the z-index of the target.
+     * The z-index is used to determine if the target is in front of or behind
+     * an obstacle. If the z-index of the target is lower it is more in the
+     * front.
+     * If the z-index of the target is higher it is more in the back.
      * 
      * @return the z-index of the target
      */

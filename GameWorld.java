@@ -8,7 +8,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * It initializes all objects needed in the world and controls them.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  * 
  * @see Crosshair
  * @see Chicken
@@ -101,7 +101,7 @@ public class GameWorld extends World {
 
     /**
      * The decreaseChickenAmount method decreases the chicken counter by one
-     * if chickes exist.
+     * if chickes exist. If no chickens exist the counter is not decreased.
      * 
      * @see Chicken
      */

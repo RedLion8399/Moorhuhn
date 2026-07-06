@@ -5,12 +5,17 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * to avoiid being hit.
  * 
  * @author Paul Jonas Dohle
- * @version 0.1.0
+ * @version 1.0.0
  */
 public class Tree extends Obstacle {
 
     /**
      * Constructs objects of class tree
+     * It scales the image to a fixed size and adds it to the world at a random
+     * position within the world boundaries with a margin of 100 pixels on the
+     * left and right side.
+     * 
+     * @param world The game world
      */
     public Tree(GameWorld world) {
         super(world, 2, 0);
