@@ -9,17 +9,17 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Tree
  */
 public abstract class Obstacle extends Actor implements ZIndexable {
-    protected final GameWorld WORLD;
-    protected final int Z_INDEX;
-    protected final int POINTS;
+    protected final GameWorld world;
+    protected final int zIndex;
+    protected final int points;
 
     /**
      * Constructs objects of class Obstacle
      */
     public Obstacle(GameWorld world, int zIndex, int points) {
-        WORLD = world;
-        Z_INDEX = zIndex;
-        POINTS = points;
+        this.world = world;
+        this.zIndex = zIndex;
+        this.points = points;
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class Obstacle extends Actor implements ZIndexable {
      */
     @Override
     public int getZIndex() {
-        return Z_INDEX;
+        return zIndex;
     }
 
     /**
@@ -47,6 +47,6 @@ public abstract class Obstacle extends Actor implements ZIndexable {
      * @return the points of the obstacle
      */
     public int getPoints() {
-        return POINTS;
+        return points;
     }
 }

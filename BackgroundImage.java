@@ -8,7 +8,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 0.1.0
  */
 public class BackgroundImage extends Actor {
-    private final GameWorld WORLD;
+    private final GameWorld world;
 
     /**
      * Creates a new BackgroundImage object.
@@ -18,10 +18,11 @@ public class BackgroundImage extends Actor {
      * @param world the world the actor is in
      */
     public BackgroundImage(GameWorld world) {
-        this.WORLD = world;
-        getImage().scale(WORLD.getWidth() * 2, WORLD.getHeight());
+        this.world = world;
+        getImage().scale(this.world.getWidth() * 2, this.world.getHeight());
 
-        WORLD.addObject(this, WORLD.getWidth() / 2, WORLD.getHeight() / 2);
+        this.world.addObject(this, this.world.getWidth() / 2,
+                this.world.getHeight() / 2);
     }
 
     /**

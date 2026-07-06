@@ -15,7 +15,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  */
 public class Crosshair extends Actor {
-    private final GameWorld WORLD;
+    private final GameWorld world;
 
     private int munitionAmount;
     private int shootingDelay;
@@ -30,7 +30,7 @@ public class Crosshair extends Actor {
      * @see GameWorld
      */
     public Crosshair(GameWorld world) {
-        this.WORLD = world;
+        this.world = world;
         munitionAmount = 8;
         shootingDelay = 0;
         getImage().scale(30, 30);
@@ -83,9 +83,9 @@ public class Crosshair extends Actor {
      */
     private void checkScrolling() {
         if (getX() < 50) {
-            WORLD.move(5);
-        } else if (getX() > WORLD.getWidth() - 50) {
-            WORLD.move(-5);
+            world.move(5);
+        } else if (getX() > world.getWidth() - 50) {
+            world.move(-5);
         }
     }
 

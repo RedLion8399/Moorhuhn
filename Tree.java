@@ -15,9 +15,9 @@ public class Tree extends Obstacle {
     public Tree(GameWorld world) {
         super(world, 2, 0);
         getImage().scale(300, 300);
-        WORLD.addObject(this,
-                Greenfoot.getRandomNumber(WORLD.getWidth() - 200) + 100,
-                WORLD.getHeight() - getImage().getHeight() / 2);
+        world.addObject(this,
+                Greenfoot.getRandomNumber(world.getWidth() - 200) + 100,
+                world.getHeight() - getImage().getHeight() / 2);
     }
 
     /**

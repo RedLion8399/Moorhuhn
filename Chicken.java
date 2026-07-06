@@ -13,18 +13,18 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Crosshair
  */
 public abstract class Chicken extends Actor implements ZIndexable {
-    private final int POINTS;
-    private final GameWorld WORLD;
-    private final BackgroundImage BACKGROUND;
+    private final int points;
+    private final GameWorld world;
+    private final BackgroundImage background;
 
     private final int zIndex;
-    private final int SIZE;
+    private final int size;
     private final int x_0;
     private final int y_0;
-    private final int SPEED;
-    private final int FLIGHT_HEIGHT;
-    private final int FLIGHT_FREQUENCY;
-    private final boolean FACING_RIGHT;
+    private final int speed;
+    private final int flightHight;
+    private final int flightFrequency;
+    private final boolean facingRight;
 
     /**
      * Returns an object of a random subclass of the Chicken class.
@@ -55,38 +55,38 @@ public abstract class Chicken extends Actor implements ZIndexable {
      * @throws IllegalStateException if te size is out of bounds
      */
     public Chicken(GameWorld world, BackgroundImage background, int zIndex) {
-        this.WORLD = world;
-        this.BACKGROUND = background;
-        SIZE = Greenfoot.getRandomNumber(3) + 1;
-        getImage().scale(SIZE * 25, SIZE * 25);
+        this.world = world;
+        this.background = background;
+        size = Greenfoot.getRandomNumber(3) + 1;
+        getImage().scale(size * 25, size * 25);
 
         this.zIndex = zIndex;
-        y_0 = Greenfoot.getRandomNumber(WORLD.getHeight() - 60) + 30;
-        FLIGHT_HEIGHT = Greenfoot.getRandomNumber(40) + 10;
-        FLIGHT_FREQUENCY = Greenfoot.getRandomNumber(300) + 85;
+        y_0 = Greenfoot.getRandomNumber(this.world.getHeight() - 60) + 30;
+        flightHight = Greenfoot.getRandomNumber(40) + 10;
+        flightFrequency = Greenfoot.getRandomNumber(300) + 85;
 
         if (Greenfoot.getRandomNumber(2) == 1) {
-            FACING_RIGHT = true;
+            facingRight = true;
             setRotation(0);
-            x_0 = BACKGROUND.getImageStart();
-            SPEED = Greenfoot.getRandomNumber(4) + 1;
+            x_0 = this.background.getImageStart();
+            speed = Greenfoot.getRandomNumber(4) + 1;
         } else {
-            FACING_RIGHT = false;
+            facingRight = false;
             setRotation(180);
             getImage().mirrorVertically();
-            x_0 = BACKGROUND.getImageEnd();
-            SPEED = -Greenfoot.getRandomNumber(4) - 1;
+            x_0 = this.background.getImageEnd();
+            speed = -Greenfoot.getRandomNumber(4) - 1;
         }
 
-        WORLD.addObject(this, x_0, y_0);
+        this.world.addObject(this, x_0, y_0);
 
-        switch (SIZE) {
-            case 1 -> POINTS = 25;
-            case 2 -> POINTS = 10;
-            case 3 -> POINTS = 5;
+        switch (size) {
+            case 1 -> points = 25;
+            case 2 -> points = 10;
+            case 3 -> points = 5;
 
             default -> throw new IllegalStateException(
-                    "Unexpected value SIZE: " + SIZE);
+                    "Unexpected value size: " + size);
         }
     }
 
@@ -122,15 +122,15 @@ public abstract class Chicken extends Actor implements ZIndexable {
         int x = getX();
         int y = getY();
 
-        x += SPEED;
-        y = (int) (FLIGHT_HEIGHT
-                * Math.sin(x * (Math.PI / FLIGHT_FREQUENCY))
+        x += speed;
+        y = (int) (flightHight
+                * Math.sin(x * (Math.PI / flightFrequency))
                 + y_0);
         setLocation(x, y);
 
-        if (!intersects(BACKGROUND)) {
-            WORLD.decreaseChickenAmount();
-            WORLD.removeObject(this);
+        if (!intersects(background)) {
+            world.decreaseChickenAmount();
+            world.removeObject(this);
         }
     }
 
@@ -147,9 +147,9 @@ public abstract class Chicken extends Actor implements ZIndexable {
             obstacle.hit();
             return;
         }
-        WORLD.decreaseChickenAmount();
-        WORLD.addPoints(POINTS);
-        WORLD.removeObject(this);
+        world.decreaseChickenAmount();
+        world.addPoints(points);
+        world.removeObject(this);
         Greenfoot.playSound("sounds/hit-target.mp3");
     }
 
@@ -160,6 +160,6 @@ public abstract class Chicken extends Actor implements ZIndexable {
      * @return whether the chicken is currently facing right or left
      */
     public boolean isFacingRight() {
-        return FACING_RIGHT;
+        return facingRight;
     }
 }

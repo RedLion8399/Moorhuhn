@@ -16,9 +16,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see BackgroundImage
  */
 public class GameWorld extends World {
-    private final Crosshair CROSSHAIR;
-    private final Scoreboard SCOREBOARD;
-    private final BackgroundImage BACKGROUND_IMAGE;
+    private final Crosshair crosshair;
+    private final Scoreboard scoreboard;
+    private final BackgroundImage backgroundImage;
 
     private int chickenAmount;
     private int points;
@@ -40,10 +40,10 @@ public class GameWorld extends World {
         getBackground().scale(getWidth(), getHeight());
         chickenAmount = 0;
 
-        CROSSHAIR = new Crosshair(this);
-        addObject(CROSSHAIR, getWidth() / 2, getHeight() / 2);
-        SCOREBOARD = new Scoreboard(this, CROSSHAIR);
-        BACKGROUND_IMAGE = new BackgroundImage(this);
+        crosshair = new Crosshair(this);
+        addObject(crosshair, getWidth() / 2, getHeight() / 2);
+        scoreboard = new Scoreboard(this, crosshair);
+        backgroundImage = new BackgroundImage(this);
         new Tree(this);
     }
 
@@ -66,7 +66,7 @@ public class GameWorld extends World {
     private void spawnChicken() {
         if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
             chickenAmount++;
-            Chicken.getChicken(this, BACKGROUND_IMAGE);
+            Chicken.getChicken(this, backgroundImage);
         }
     }
 
@@ -79,13 +79,13 @@ public class GameWorld extends World {
      * @param distance the amount of pixels to move
      */
     public void move(int distance) {
-        if (distance > 0 && BACKGROUND_IMAGE.getImageStart() + distance > 0) {
+        if (distance > 0 && backgroundImage.getImageStart() + distance > 0) {
             return;
         } else if (distance < 0
-                && BACKGROUND_IMAGE.getImageEnd() + distance < getWidth()) {
+                && backgroundImage.getImageEnd() + distance < getWidth()) {
             return;
         }
-        BACKGROUND_IMAGE.move(distance);
+        backgroundImage.move(distance);
 
         List<Chicken> chickens = getObjects(Chicken.class);
         for (Chicken chicken : chickens) {

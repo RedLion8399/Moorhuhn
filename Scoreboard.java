@@ -11,8 +11,8 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Crosshair
  */
 public class Scoreboard extends Actor {
-    private final GameWorld WORLD;
-    private final Crosshair CROSSHAIR;
+    private final GameWorld world;
+    private final Crosshair crosshair;
 
     /**
      * The constructor initializes the scoreboard. It scales the image of the
@@ -24,11 +24,11 @@ public class Scoreboard extends Actor {
      * @see GameWorld#addObject(Actor, int, int)
      */
     public Scoreboard(GameWorld world, Crosshair crosshair) {
-        WORLD = world;
-        CROSSHAIR = crosshair;
+        this.world = world;
+        this.crosshair = crosshair;
         getImage().scale(150, 50);
 
-        WORLD.addObject(this, WORLD.getWidth() -
+        this.world.addObject(this, this.world.getWidth() -
                 getImage().getWidth() / 2 - 8,
                 getImage().getHeight() / 2 + 8);
     }
@@ -51,12 +51,12 @@ public class Scoreboard extends Actor {
      */
     private void update() {
         String message = String.format("Punte: %d    Munition: %d",
-                WORLD.getPoints(), CROSSHAIR.getMunitionAmount());
+                world.getPoints(), crosshair.getMunitionAmount());
         getImage().clear();
         setImage("images/display.png");
         getImage().drawString(message, 10,
                 (getImage().getHeight() + getImage().getFont().getSize()) / 2);
-        setLocation(WORLD.getWidth() - getImage().getWidth() / 2 - 8, getY());
+        setLocation(world.getWidth() - getImage().getWidth() / 2 - 8, getY());
 
     }
 }
