@@ -2,27 +2,27 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The BackgroundImage class represents the background image in the game.
- * As the Backround has to move a seperate actor is needed to represet it.
+ * As the Background has to move a seperate actor is needed to represent it.
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
  */
 public class BackgroundImage extends Actor {
-    private final GameWorld world;
+    private static final int SCALE_FACTOR = 2;
 
     /**
      * Creates a new BackgroundImage object.
-     * The image is scaled to be wider than the game world in order o allow
+     * The image is scaled to be wider than the game world in order to allow
      * scrolling.
      * 
      * @param world the world the actor is in
      */
     public BackgroundImage(GameWorld world) {
-        this.world = world;
-        getImage().scale(this.world.getWidth() * 2, this.world.getHeight());
+        getImage().scale(world.getWidth() * SCALE_FACTOR,
+                world.getHeight());
 
-        this.world.addObject(this, this.world.getWidth() / 2,
-                this.world.getHeight() / 2);
+        world.addObject(this, world.getWidth() / 2,
+                world.getHeight() / 2);
     }
 
     /**
