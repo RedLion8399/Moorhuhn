@@ -1,7 +1,5 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-@SuppressWarnings("unused")
-
 /**
  * The Crosshair class represents the crosshair in the game and is the equal to
  * a player. It controlls the player input and processes them by moving the
