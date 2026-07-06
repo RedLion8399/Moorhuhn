@@ -22,7 +22,7 @@ public abstract class Chicken extends Actor implements ZIndexable {
     private final int x_0;
     private final int y_0;
     private final int speed;
-    private final int flightHight;
+    private final int flightHeight;
     private final int flightFrequency;
     private final boolean facingRight;
 
@@ -57,12 +57,13 @@ public abstract class Chicken extends Actor implements ZIndexable {
     public Chicken(GameWorld world, BackgroundImage background, int zIndex) {
         this.world = world;
         this.background = background;
+        this.zIndex = zIndex;
+
         size = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(size * 25, size * 25);
 
-        this.zIndex = zIndex;
         y_0 = Greenfoot.getRandomNumber(this.world.getHeight() - 60) + 30;
-        flightHight = Greenfoot.getRandomNumber(40) + 10;
+        flightHeight = Greenfoot.getRandomNumber(40) + 10;
         flightFrequency = Greenfoot.getRandomNumber(300) + 85;
 
         if (Greenfoot.getRandomNumber(2) == 1) {
@@ -103,38 +104,6 @@ public abstract class Chicken extends Actor implements ZIndexable {
     }
 
     /**
-     * Returns the z-index of the target.
-     * 
-     * @return the z-index of the target
-     */
-    @Override
-    public int getZIndex() {
-        return zIndex;
-    }
-
-    /**
-     * The move method controls the movement of the targets. It is called in the
-     * {@link #act()} method. It moves the chicken with constant speed in the
-     * direction it is currently facing. If the chicken reaches the edge of
-     * the Background it is deleted and the chicken counter is decreased by one.
-     */
-    private void move() {
-        int x = getX();
-        int y = getY();
-
-        x += speed;
-        y = (int) (flightHight
-                * Math.sin(x * (Math.PI / flightFrequency))
-                + y_0);
-        setLocation(x, y);
-
-        if (!intersects(background)) {
-            world.decreaseChickenAmount();
-            world.removeObject(this);
-        }
-    }
-
-    /**
      * The hit method is called if a shot hits a target.
      * It deletes the target, decreases the chicken counter and adds points.
      * 
@@ -154,6 +123,28 @@ public abstract class Chicken extends Actor implements ZIndexable {
     }
 
     /**
+     * The move method controls the movement of the targets. It is called in the
+     * {@link #act()} method. It moves the chicken with constant speed in the
+     * direction it is currently facing. If the chicken reaches the edge of
+     * the Background it is deleted and the chicken counter is decreased by one.
+     */
+    private void move() {
+        int x = getX();
+        int y = getY();
+
+        x += speed;
+        y = (int) (flightHeight
+                * Math.sin(x * (Math.PI / flightFrequency))
+                + y_0);
+        setLocation(x, y);
+
+        if (!intersects(background)) {
+            world.decreaseChickenAmount();
+            world.removeObject(this);
+        }
+    }
+
+    /**
      * The isFacingRight method returns whether the chicken is currently facing
      * right or left.
      * 
@@ -161,5 +152,15 @@ public abstract class Chicken extends Actor implements ZIndexable {
      */
     public boolean isFacingRight() {
         return facingRight;
+    }
+
+    /**
+     * Returns the z-index of the target.
+     * 
+     * @return the z-index of the target
+     */
+    @Override
+    public int getZIndex() {
+        return zIndex;
     }
 }
