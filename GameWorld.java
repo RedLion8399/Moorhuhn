@@ -5,7 +5,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The GameWorld class is the world in which the game takes place.
- * It innitializes all objects needed in the world and controls them.
+ * It initializes all objects needed in the world and controls them.
  * 
  * @author Paul Jonas Dohle
  * @version 0.1.0
@@ -20,13 +20,13 @@ public class GameWorld extends World {
     private final Scoreboard scoreboard;
     private final BackgroundImage backgroundImage;
 
-    private int chickenAmount;
-    private int points;
+    private int chickenAmount = 0;
+    private int points = 0;
 
     /**
      * Constructor for objects of class GameWorld.
-     * It creates a GameWorld object with certain dimensions and a certain cell
-     * size. It creates references to other objects that are needed in the
+     * It creates a GameWorld object with a fixed size and cell size.
+     * It creates references to other objects that are needed in the
      * world.
      * 
      * @see Crosshair
@@ -38,10 +38,8 @@ public class GameWorld extends World {
         setPaintOrder(Crosshair.class, Scoreboard.class, ChickenFront.class,
                 Tree.class, ChickenBack.class);
         getBackground().scale(getWidth(), getHeight());
-        chickenAmount = 0;
 
         crosshair = new Crosshair(this);
-        addObject(crosshair, getWidth() / 2, getHeight() / 2);
         scoreboard = new Scoreboard(this, crosshair);
         backgroundImage = new BackgroundImage(this);
         new Tree(this);
@@ -64,7 +62,10 @@ public class GameWorld extends World {
      * limited to 5.
      */
     private void spawnChicken() {
-        if (Greenfoot.getRandomNumber(750) < 2 * (5 - chickenAmount)) {
+        final int maxChickenAmount = 5;
+
+        if (Greenfoot.getRandomNumber(750) < 2
+                * (maxChickenAmount - chickenAmount)) {
             chickenAmount++;
             Chicken.getChicken(this, backgroundImage);
         }
@@ -99,12 +100,15 @@ public class GameWorld extends World {
     }
 
     /**
-     * The decreaseChickenAmount method decreases the chicken counter by one.
+     * The decreaseChickenAmount method decreases the chicken counter by one
+     * if chickes exist.
      * 
      * @see Chicken
      */
     public void decreaseChickenAmount() {
-        chickenAmount--;
+        if (chickenAmount > 0) {
+            chickenAmount--;
+        }
     }
 
     /**

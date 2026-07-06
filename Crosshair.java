@@ -33,6 +33,10 @@ public class Crosshair extends Actor {
         munitionAmount = MAX_MUNITION;
         shootingDelayCounter = 0;
         getImage().scale(30, 30);
+
+        this.world.addObject(this,
+                this.world.getWidth() / 2,
+                this.world.getHeight() / 2);
     }
 
     /**
