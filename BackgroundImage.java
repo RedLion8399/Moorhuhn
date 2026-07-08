@@ -1,9 +1,6 @@
 /**
  * The BackgroundImage class represents the background image in the game.
  * As the Background has to move a seperate actor is needed to represent it.
- * 
- * @author Paul Jonas Dohle
- * @version 1.0.0
  */
 public class BackgroundImage extends ImprovedActor {
     private static final int SCALE_FACTOR = 2;

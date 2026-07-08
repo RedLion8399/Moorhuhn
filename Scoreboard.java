@@ -4,9 +4,6 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The scoreboard displays essential information in the game,
  * the points and munition.
  * 
- * @author Paul Jonas Dohle
- * @version 1.0.0
- * 
  * @see GameWorld
  * @see Crosshair
  */
@@ -57,6 +54,10 @@ public class Scoreboard extends ImprovedActor {
         getImage().drawString(message, 10,
                 (getImage().getHeight() + getImage().getFont().getSize()) / 2);
         setLocation(world.getWidth() - getImage().getWidth() / 2 - 8, getY());
+    }
 
+    @Override
+    public int getZIndex() {
+        return 0;
     }
 }
