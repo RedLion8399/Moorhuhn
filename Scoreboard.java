@@ -54,6 +54,10 @@ public class Scoreboard extends ImprovedActor {
         getImage().drawString(message, 10,
                 (getImage().getHeight() + getImage().getFont().getSize()) / 2);
         setLocation(world.getWidth() - getImage().getWidth() / 2 - 8, getY());
+    }
 
+    @Override
+    public int getZIndex() {
+        return 0;
     }
 }

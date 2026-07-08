@@ -7,6 +7,23 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * this instead.
  */
 public abstract class ImprovedActor extends Actor {
+    protected final int zIndex;
+
+    /**
+     * Creates a new ImprovedActor.
+     *
+     * @param zIndex The z-index of the Actor
+     */
+    public ImprovedActor(int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * Creates a new ImprovedActor with a default z-index of 0.
+     */
+    public ImprovedActor() {
+        this(0);
+    }
 
     /**
      * The method returns if the image of an ImprovedActor is transparent at a
@@ -29,5 +46,18 @@ public abstract class ImprovedActor extends Actor {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns the z-index of the Actor.
+     * The z-index is used to determine if the Actor is in front of or behind
+     * an other Actor. If the z-index of the Actor is lower it is more in the
+     * front.
+     * If the z-index of the Actor is higher it is more in the back.
+     *
+     * @return the z-index of the Actor
+     */
+    public int getZIndex() {
+        return zIndex;
     }
 }

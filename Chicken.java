@@ -9,12 +9,11 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  * @see Crosshair
  */
-public abstract class Chicken extends ImprovedActor implements ZIndexable {
+public abstract class Chicken extends ImprovedActor {
     private final int points;
     private final GameWorld world;
     private final BackgroundImage background;
 
-    private final int zIndex;
     private final int size;
     private final int x_0;
     private final int y_0;
@@ -52,9 +51,9 @@ public abstract class Chicken extends ImprovedActor implements ZIndexable {
      * @throws IllegalStateException if te size is out of bounds
      */
     public Chicken(GameWorld world, BackgroundImage background, int zIndex) {
+        super(zIndex);
         this.world = world;
         this.background = background;
-        this.zIndex = zIndex;
 
         size = Greenfoot.getRandomNumber(3) + 1;
         getImage().scale(size * 25, size * 25);
@@ -153,19 +152,5 @@ public abstract class Chicken extends ImprovedActor implements ZIndexable {
      */
     public boolean isFacingRight() {
         return facingRight;
-    }
-
-    /**
-     * Returns the z-index of the target.
-     * The z-index is used to determine if the target is in front of or behind
-     * an obstacle. If the z-index of the target is lower it is more in the
-     * front.
-     * If the z-index of the target is higher it is more in the back.
-     * 
-     * @return the z-index of the target
-     */
-    @Override
-    public int getZIndex() {
-        return zIndex;
     }
 }
