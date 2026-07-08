@@ -12,7 +12,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  * @see Crosshair
  */
-public abstract class Chicken extends Actor implements ZIndexable {
+public abstract class Chicken extends ImprovedActor implements ZIndexable {
     private final int points;
     private final GameWorld world;
     private final BackgroundImage background;

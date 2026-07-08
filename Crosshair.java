@@ -12,7 +12,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see Chicken
  * @see GameWorld
  */
-public class Crosshair extends Actor {
+public class Crosshair extends ImprovedActor {
     private static final int MAX_MUNITION = 8;
     private final GameWorld world;
 

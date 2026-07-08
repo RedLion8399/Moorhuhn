@@ -7,7 +7,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Paul Jonas Dohle
  * @version 1.0.0
  */
-public class BackgroundImage extends Actor {
+public class BackgroundImage extends ImprovedActor {
     private static final int SCALE_FACTOR = 2;
 
     /**
