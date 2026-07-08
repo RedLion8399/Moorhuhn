@@ -1,5 +1,3 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * The Obstacle class represents obstacles in the game.
  * 
@@ -8,7 +6,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @see Tree
  */
-public abstract class Obstacle extends Actor implements ZIndexable {
+public abstract class Obstacle extends ImprovedActor implements ZIndexable {
     protected final GameWorld world;
     protected final int zIndex;
     protected final int points;

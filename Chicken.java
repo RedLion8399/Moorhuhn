@@ -7,12 +7,12 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * specify by different z-coordinates.
  * 
  * @author Paul Jonas Dohle
- * @version 1.0.0
+ * @version 2.0.0
  * 
  * @see GameWorld
  * @see Crosshair
  */
-public abstract class Chicken extends Actor implements ZIndexable {
+public abstract class Chicken extends ImprovedActor implements ZIndexable {
     private final int points;
     private final GameWorld world;
     private final BackgroundImage background;
@@ -104,15 +104,19 @@ public abstract class Chicken extends Actor implements ZIndexable {
     }
 
     /**
-     * The hit method is called if a shot hits a target.
+     * The hit method is called if a shot hits a target at a certain position.
      * It deletes the target, decreases the chicken counter and adds points.
+     *
+     * @param x The x-coordinate where it was hit
+     * @param y The y-coordinate where it was hit
      * 
      * @see Crosshair#shoot()
      * @see GameWorld#addPoints(int)
      */
-    public void hit() {
+    public void hit(int x, int y) {
         Obstacle obstacle = (Obstacle) getOneIntersectingObject(Obstacle.class);
-        if (obstacle != null && obstacle.getZIndex() < getZIndex()) {
+        if (obstacle != null && obstacle.getZIndex() < getZIndex() &&
+                obstacle.isTransparentAtPosition(x, y)) {
             obstacle.hit();
             return;
         }

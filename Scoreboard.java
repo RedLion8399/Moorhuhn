@@ -10,7 +10,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  * @see Crosshair
  */
-public class Scoreboard extends Actor {
+public class Scoreboard extends ImprovedActor {
     private final GameWorld world;
     private final Crosshair crosshair;
 
