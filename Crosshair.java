@@ -138,7 +138,7 @@ public class Crosshair extends ImprovedActor {
 
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
-            chicken.hit();
+            chicken.hit(getX() ,getY());
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }
