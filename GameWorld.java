@@ -7,9 +7,6 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The GameWorld class is the world in which the game takes place.
  * It initializes all objects needed in the world and controls them.
  * 
- * @author Paul Jonas Dohle
- * @version 1.0.0
- * 
  * @see Crosshair
  * @see Chicken
  * @see Scoreboard

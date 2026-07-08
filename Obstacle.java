@@ -1,9 +1,6 @@
 /**
  * The Obstacle class represents obstacles in the game.
  * 
- * @author Paul Jonas Dohle
- * @version 1.0.0
- * 
  * @see Tree
  */
 public abstract class Obstacle extends ImprovedActor implements ZIndexable {

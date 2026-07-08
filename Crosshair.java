@@ -6,9 +6,6 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * moving the crosshair, checking for hits on the targets, controlling the
  * munition and reloading it.
  * 
- * @author Paul Jonas Dohle
- * @version 1.0.0
- * 
  * @see Chicken
  * @see GameWorld
  */
@@ -138,7 +135,7 @@ public class Crosshair extends ImprovedActor {
 
         Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
         if (chicken != null) {
-            chicken.hit(getX() ,getY());
+            chicken.hit(getX(), getY());
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }

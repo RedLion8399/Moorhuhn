@@ -6,9 +6,6 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The Chicken superclass provides the functionality which the subclasses
  * specify by different z-coordinates.
  * 
- * @author Paul Jonas Dohle
- * @version 2.0.0
- * 
  * @see GameWorld
  * @see Crosshair
  */
