@@ -1,5 +1,3 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * The Obstacle class represents obstacles in the game.
  * 

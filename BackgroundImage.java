@@ -1,5 +1,3 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * The BackgroundImage class represents the background image in the game.
  * As the Background has to move a seperate actor is needed to represent it.
