@@ -1,3 +1,5 @@
+import java.time.Duration;
+
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -47,8 +49,11 @@ public class Scoreboard extends ImprovedActor {
      * @see Crosshair#getMunitionAmount()
      */
     private void update() {
-        String message = String.format("Punkte: %d    Munition: %d",
-                world.getPoints(), crosshair.getMunitionAmount());
+        Duration leftTime = world.getLeftTime();
+        String message = String.format(
+                "Punkte: %d    Munition: %d    %02d:%02d",
+                world.getPoints(), crosshair.getMunitionAmount(),
+                leftTime.toMinutesPart(), leftTime.toSecondsPart());
         getImage().clear();
         setImage("images/display.png");
         getImage().drawString(message, 10,

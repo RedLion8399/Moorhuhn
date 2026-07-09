@@ -53,9 +53,8 @@ public class GameWorld extends World {
     @Override
     public void act() {
         spawnChicken();
-        System.out.println(getPassedTime().toSeconds());
 
-        if (getPassedTime().toSeconds() >= 90) {
+        if (getLeftTime().toSeconds() <= 0) {
             Greenfoot.stop();
         }
     }
@@ -118,8 +117,9 @@ public class GameWorld extends World {
      * 
      * @return the duration that has passed since the start of the game
      */
-    public Duration getPassedTime() {
-        return Duration.ofMillis(System.currentTimeMillis() - startTime);
+    public Duration getLeftTime() {
+        return Duration
+                .ofMillis(90 * 1000 - (System.currentTimeMillis() - startTime));
     }
 
     /**
