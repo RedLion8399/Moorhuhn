@@ -5,6 +5,7 @@ class.Crosshair.image=crosshair-1.png
 class.Scoreboard.image=display.png
 class.Tree.image=tree-1.png
 class.BackgroundImage.image=field-4.png
+class.Mill.image=windmill-1.png
 package.numDependencies=0
 package.numTargets=0
 project.charset=UTF-8

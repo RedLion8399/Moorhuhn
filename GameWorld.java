@@ -42,6 +42,7 @@ public class GameWorld extends World {
         scoreboard = new Scoreboard(this, crosshair);
         backgroundImage = new BackgroundImage(this);
         new Tree(this);
+        new Windmill(this, backgroundImage);
     }
 
     /**

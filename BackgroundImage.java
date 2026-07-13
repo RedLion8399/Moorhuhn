@@ -1,3 +1,5 @@
+import greenfoot.*;
+
 /**
  * The BackgroundImage class represents the background image in the game.
  * As the Background has to move a seperate actor is needed to represent it.
@@ -36,5 +38,26 @@ public class BackgroundImage extends ImprovedActor {
      */
     public int getImageEnd() {
         return getX() + getImage().getWidth() / 2;
+    }
+
+    /**
+     * Returns the current x-position of the BackgroundImage
+     * 
+     * @param margin the margin to the left and right
+     * 
+     * @return the current x-position
+     */
+    public int getRandomXOnBackground(int margin) {
+        return Greenfoot.getRandomNumber(getImage().getWidth() - margin * 2)
+                + getImageStart() + margin;
+    }
+
+    /**
+     * Returns the current x-position of the BackgroundImage without any margin
+     * 
+     * @return the current x-position
+     */
+    public int getRandomXOnBackground() {
+        return getRandomXOnBackground(0);
     }
 }
