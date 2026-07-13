@@ -40,7 +40,7 @@ public abstract class ImprovedActor extends Actor {
         int relX = absX - getX() + image.getWidth() / 2;
         int relY = absY - getY() + image.getHeight() / 2;
 
-        if (relX >= 0 && relY < image.getWidth() && relY >= 0
+        if (relX >= 0 && relX < image.getWidth() && relY >= 0
                 && relY < image.getHeight()) {
             return image.getColorAt(relX, relY).getAlpha() > 0;
         } else {

@@ -1,4 +1,5 @@
 import java.util.List;
+import java.time.Duration;
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 @SuppressWarnings("unused")
@@ -19,6 +20,7 @@ public class GameWorld extends World {
 
     private int chickenAmount = 0;
     private int points = 0;
+    private long startTime;
 
     /**
      * Constructor for objects of class GameWorld.
@@ -51,6 +53,19 @@ public class GameWorld extends World {
     @Override
     public void act() {
         spawnChicken();
+
+        if (getLeftTime().toSeconds() <= 0) {
+            Greenfoot.stop();
+        }
+    }
+
+    /**
+     * The started method is called when the game is started.
+     * It sets the start time of the game to the current time in milliseconds.
+     */
+    @Override
+    public void started() {
+        startTime = System.currentTimeMillis();
     }
 
     /**
@@ -94,6 +109,17 @@ public class GameWorld extends World {
         for (Obstacle obstacle : obstacles) {
             obstacle.move(distance);
         }
+    }
+
+    /**
+     * The getPassedTime method returns a Duration object that represents the
+     * time that has passed since the start of the game.
+     * 
+     * @return the duration that has passed since the start of the game
+     */
+    public Duration getLeftTime() {
+        return Duration
+                .ofMillis(90 * 1000 - (System.currentTimeMillis() - startTime));
     }
 
     /**
