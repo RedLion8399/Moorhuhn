@@ -24,6 +24,17 @@ public class Windmill extends Obstacle {
     }
 
     /**
+     * The act method is the anchor for the game loop which calls it on every
+     * frame. It rotates the windmill blades.
+     * 
+     * @see #rotateBlades()
+     */
+    @Override
+    public void act() {
+        rotateBlades();
+    }
+
+    /**
      * The hit method is called when the windmill is hit by a projectile.
      * It does nothing as windmills are indestructible.
      * 
@@ -31,6 +42,13 @@ public class Windmill extends Obstacle {
      */
     @Override
     public void hit() {
+    }
+
+    /**
+     * The rotateBlades method rotates the windmill blades around the center.
+     */
+    private void rotateBlades() {
+        blades.turn(1);
     }
 
     class Blade extends Obstacle {
