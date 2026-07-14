@@ -29,6 +29,6 @@ public class Tree extends Obstacle {
      * @see Crosshair#shoot()
      */
     @Override
-    public void hit(int x, int y) {
+    public void hit() {
     }
 }

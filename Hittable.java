@@ -11,5 +11,5 @@ public interface Hittable {
      * 
      * @see Crosshair#shoot()
      */
-    public abstract void hit(int x, int y);
+    public abstract void hit();
 }

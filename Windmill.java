@@ -1,3 +1,5 @@
+import greenfoot.Greenfoot;
+
 /**
  * The Windmill functions as unmovable obstacle. It is on the last of all
  * layers. On the widmill, three windmill blades are rotating. They are hittable
@@ -28,7 +30,7 @@ public class Windmill extends Obstacle {
      * @see Crosshair#shoot()
      */
     @Override
-    public void hit(int x, int y) {
+    public void hit() {
     }
 
     class Blade extends Obstacle {
@@ -52,11 +54,15 @@ public class Windmill extends Obstacle {
 
         /**
          * The hit method is called when the windmill is hit by a projectile.
+         * On hit the blades are removed and 25 points are added.
          * 
          * @see Crosshair#shoot()
          */
         @Override
-        public void hit(int x, int y) {
+        public void hit() {
+            world.addPoints(points);
+            world.removeObject(this);
+            Greenfoot.playSound("sounds/hit-target.mp3");
         }
     }
 }

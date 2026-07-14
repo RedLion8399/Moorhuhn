@@ -110,7 +110,7 @@ public abstract class Chicken extends ImprovedActor implements Hittable {
      * @see GameWorld#addPoints(int)
      */
     @Override
-    public void hit(int x, int y) {
+    public void hit() {
         world.decreaseChickenAmount();
         world.addPoints(points);
         world.removeObject(this);

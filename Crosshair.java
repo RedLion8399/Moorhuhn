@@ -147,7 +147,7 @@ public class Crosshair extends ImprovedActor {
         actors.sort(Comparator.comparingInt(ImprovedActor::getZIndex));
 
         if (actors.size() > 0) {
-            ((Hittable) actors.get(0)).hit(getX(), getY());
+            ((Hittable) actors.get(0)).hit();
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }
