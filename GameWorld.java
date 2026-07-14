@@ -35,7 +35,8 @@ public class GameWorld extends World {
     public GameWorld() {
         super(600, 400, 1, false);
         setPaintOrder(Crosshair.class, Scoreboard.class, ChickenFront.class,
-                Tree.class, ChickenBack.class);
+                Tree.class, ChickenBack.class, Windmill.Blade.class,
+                Windmill.class, BackgroundImage.class);
         getBackground().scale(getWidth(), getHeight());
 
         crosshair = new Crosshair(this);
