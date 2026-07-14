@@ -12,7 +12,7 @@ public class Windmill extends Obstacle {
      * @param world the world to which the Windmill is added
      */
     public Windmill(GameWorld world, BackgroundImage backgroundImage) {
-        super(world, 0, 0);
+        super(world, 4, 0);
         setImage("images/windmill-2.png");
         getImage().scale(350, 350);
         world.addObject(this, backgroundImage.getRandomXOnBackground(100),
