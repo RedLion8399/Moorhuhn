@@ -9,7 +9,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @see GameWorld
  * @see Crosshair
  */
-public abstract class Chicken extends ImprovedActor {
+public abstract class Chicken extends ImprovedActor implements Hittable {
     private final int points;
     private final GameWorld world;
     private final BackgroundImage background;
@@ -109,11 +109,12 @@ public abstract class Chicken extends ImprovedActor {
      * @see Crosshair#shoot()
      * @see GameWorld#addPoints(int)
      */
+    @Override
     public void hit(int x, int y) {
         Obstacle obstacle = (Obstacle) getOneIntersectingObject(Obstacle.class);
         if (obstacle != null && obstacle.getZIndex() < getZIndex() &&
                 obstacle.isTransparentAtPosition(x, y)) {
-            obstacle.hit();
+            obstacle.hit(x, y);
             return;
         }
         world.decreaseChickenAmount();

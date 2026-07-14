@@ -27,7 +27,8 @@ public class Windmill extends Obstacle {
      * 
      * @see Crosshair#shoot()
      */
-    public void hit() {
+    @Override
+    public void hit(int x, int y) {
     }
 
     class Blade extends Obstacle {
@@ -55,7 +56,7 @@ public class Windmill extends Obstacle {
          * @see Crosshair#shoot()
          */
         @Override
-        public void hit() {
+        public void hit(int x, int y) {
         }
     }
 }
