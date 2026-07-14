@@ -1,3 +1,7 @@
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -133,9 +137,17 @@ public class Crosshair extends ImprovedActor {
         shootingDelayCounter = 0;
         Greenfoot.playSound("sounds/peng-1.mp3");
 
-        Chicken chicken = (Chicken) getOneIntersectingObject(Chicken.class);
-        if (chicken != null) {
-            chicken.hit(getX(), getY());
+        List<ImprovedActor> actors = getIntersectingObjects(
+                ImprovedActor.class)
+                .stream()
+                .filter(actor -> actor instanceof Hittable
+                        && actor.isTransparentAtPosition(getX(), getY()))
+                .collect(Collectors.toList());
+
+        actors.sort(Comparator.comparingInt(ImprovedActor::getZIndex));
+
+        if (actors.size() > 0) {
+            ((Hittable) actors.get(0)).hit(getX(), getY());
         } else {
             Greenfoot.playSound("sounds/miss-shot.mp3");
         }

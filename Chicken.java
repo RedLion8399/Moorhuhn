@@ -111,12 +111,6 @@ public abstract class Chicken extends ImprovedActor implements Hittable {
      */
     @Override
     public void hit(int x, int y) {
-        Obstacle obstacle = (Obstacle) getOneIntersectingObject(Obstacle.class);
-        if (obstacle != null && obstacle.getZIndex() < getZIndex() &&
-                obstacle.isTransparentAtPosition(x, y)) {
-            obstacle.hit(x, y);
-            return;
-        }
         world.decreaseChickenAmount();
         world.addPoints(points);
         world.removeObject(this);
