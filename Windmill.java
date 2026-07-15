@@ -71,6 +71,18 @@ public class Windmill extends Obstacle {
         }
 
         /**
+         * The move method positions the blades on the windmill.
+         * 
+         * @param distance an unused parameter
+         */
+        @Override
+        public void move(int distance) {
+            windmill = Windmill.this;
+            setLocation(windmill.getX(),
+                    windmill.getY() - getImage().getHeight() / 17);
+        }
+
+        /**
          * The hit method is called when the windmill is hit by a projectile.
          * On hit the blades are removed and 25 points are added.
          * 
